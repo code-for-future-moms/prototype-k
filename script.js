@@ -7,6 +7,12 @@ const NameMap = {
    'birth_ratio': '分娩率'
 };
 
+const ColorMap = {
+   'et_count': '#289CFD',
+   'preg_count': '#4236B8',
+   'birth_ratio': '#1DE15F',
+}
+
 const DefaultSwitchers = [NameMap['et_count']];
 const DefaultSorter = 'et_count';
 
@@ -211,18 +217,18 @@ function updateCharts(hospitalNames, etCount, pregCount, birthRate) {
    let series = [
       {
          name: NameMap["et_count"],
+         color: ColorMap["et_count"],
          data: etCount,
-         color: '#289CFD',
       },
       {
          name: NameMap["preg_count"],
+         color: ColorMap["preg_count"],
          data: pregCount,
-         color: '#4236B8',
       },
       {
          name: NameMap["birth_ratio"],
+         color: ColorMap["birth_ratio"],
          data: birthRate,
-         color: '#1DE15F',
          yAxis: 1,
       }
    ];
