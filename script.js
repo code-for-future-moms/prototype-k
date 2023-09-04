@@ -95,7 +95,7 @@ function selectInitialGraphData() {
    api.column(index).order('desc').draw();
    api.rows({page:'current'}).select().draw();
 
-   d3.select('input.btn.btn-sm[value="'+NameMap[DefaultSorter]+'"]')
+   activeSorter = d3.select('input.btn.btn-sm[value="'+NameMap[DefaultSorter]+'"]')
       .classed('btn-outline-secondary', false)
       .classed('btn-primary', true);
 }
