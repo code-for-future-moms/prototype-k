@@ -65,6 +65,21 @@ function updateSwitcher() {
          reloadCharts();
       });
 
+   let colorMapJP = {};
+   for (const key in NameMap) {
+      if (ColorMap.hasOwnProperty(key)) {
+         colorMapJP[NameMap[key]] = ColorMap[key];
+      }
+   }
+   switcher.append("svg")
+      .attr("width", 12)
+      .attr("height", 12)
+      .append("circle")
+      .attr("cx", 6)
+      .attr("cy", 6)
+      .attr("r", 6)
+      .attr("fill", (d) => colorMapJP[d]);
+
    switcher.append("label")
       .attr("class", "form-check-label")
       .attr("for", (_, i) => 'check-box-' + i)

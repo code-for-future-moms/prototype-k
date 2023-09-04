@@ -8,6 +8,10 @@ body {
    box-shadow: none !important;
 }
 
+.form-check-inline {
+   padding: 0px 2px;
+}
+
 #sorter input {
    margin: 0px 2px;
 }
