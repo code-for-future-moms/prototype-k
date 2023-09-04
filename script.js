@@ -94,7 +94,7 @@ function updateSorter() {
 function selectInitialGraphData() {
    let categories = getDataCategories();
    let index = categories.indexOf(NameMap[DefaultSorter]) + 1;
-   var api = $("#data").dataTable().api();
+   let api = $("#data").dataTable().api();
    api.column(index).order('desc').draw();
    api.rows().every(function(index, tableLoop, rowLoop) {
       if (rowLoop < PlotSample) {
