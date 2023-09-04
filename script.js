@@ -7,6 +7,7 @@ const NameMap = {
    'birth_ratio': '分娩率'
 };
 
+const DefaultSwitchers = [NameMap['et_count']];
 const DefaultSorter = 'et_count';
 
 let activeSorter = null;
@@ -37,10 +38,12 @@ function updateSwitcher() {
       .append("div")
       .attr("class", "form-check form-check-inline");
 
-   filters=[...categories];
+   filters = [...categories.filter((data) => { return DefaultSwitchers.includes(data); })];
    switcher.append("input")
       .attr("type", "checkbox")
-      .attr("checked", true)
+      .property("checked", (d) => {
+         return filters.includes(d);
+      })
       .attr("class", "form-check-input")
       .attr("id", (_, i) => 'check-box-' + i)
       .attr("value", (d) => d)
