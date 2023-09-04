@@ -93,7 +93,11 @@ function selectInitialGraphData() {
    let index = categories.indexOf(NameMap[DefaultSorter]) + 1;
    var api = $("#data").dataTable().api();
    api.column(index).order('desc').draw();
-   api.rows({page:'current'}).select().draw();
+   api.rows().every(function(index, tableLoop, rowLoop) {
+      if (rowLoop < PlotSample) {
+         this.select();
+      }
+   }).draw();
 
    activeSorter = d3.select('input.btn.btn-sm[value="'+NameMap[DefaultSorter]+'"]')
       .classed('btn-outline-secondary', false)
