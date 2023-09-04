@@ -211,15 +211,18 @@ function updateCharts(hospitalNames, etCount, pregCount, birthRate) {
    let series = [
       {
          name: NameMap["et_count"],
-         data: etCount
+         data: etCount,
+         color: '#289CFD',
       },
       {
          name: NameMap["preg_count"],
-         data: pregCount
+         data: pregCount,
+         color: '#4236B8',
       },
       {
          name: NameMap["birth_ratio"],
-         data: birthRate
+         data: birthRate,
+         color: '#1DE15F',
       }
    ];
 
