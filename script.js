@@ -223,6 +223,7 @@ function updateCharts(hospitalNames, etCount, pregCount, birthRate) {
          name: NameMap["birth_ratio"],
          data: birthRate,
          color: '#1DE15F',
+         yAxis: 1,
       }
    ];
 
@@ -249,11 +250,16 @@ function updateCharts(hospitalNames, etCount, pregCount, birthRate) {
          //    }
          // }
       },
-      yAxis: { // 通常のyAxis設定
+      yAxis: [{
          title: {
             text: ''
          },
-      },
+      }, {
+         title: {
+            text: filters.includes(NameMap["birth_ratio"]) ? NameMap["birth_ratio"] : "",
+         },
+         opposite: true,
+      }],
       series: series,
    });
 }
