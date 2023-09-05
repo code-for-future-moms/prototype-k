@@ -27,3 +27,6 @@ div.checkbox.checked {
    opacity: 1.0;
 }
 
+div#footer {
+   margin-top: 2em;
+}
