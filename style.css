@@ -1,3 +1,12 @@
+h1 {
+   color: #333333;
+   font-size: 2em;
+}
+
+h2 {
+   color: #333333;
+   font-size: 1.5em;
+}
 
 body {
    margin: 1em;
@@ -18,7 +27,15 @@ body {
 }
 
 #counter {
-   font-size: 90%;
+   font-size: 0.8em;
+}
+
+#data {
+   font-size: 0.9em;
+}
+
+#footer {
+   font-size: 0.8em;
 }
 
 div.checkbox {
