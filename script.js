@@ -1,5 +1,10 @@
-const PlotSample = 20;
+// データ
 const DataSource = 'https://raw.githubusercontent.com/sunmoonStern/funin-open-data/main/hospital-data-address.tsv'
+
+// 医療機関の最大選択数
+const PlotSample = 20;
+
+// TSVのヘッダーと日本語名の対応
 const NameMap = {
    'et_count': '移植数',
    'preg_count': '妊娠数',
@@ -7,16 +12,22 @@ const NameMap = {
    'birth_ratio': '分娩率'
 };
 
+// グラフの色
 const ColorMap = {
    'et_count': '#289CFD',
    'preg_count': '#4236B8',
    'birth_ratio': '#1DE15F',
 }
 
+// デフォルトの表示項目
 const DefaultSwitchers = [NameMap['et_count']];
+
+// デフォルトの並び順
 const DefaultSorter = 'et_count';
 
+// 状態用グローバル変数
 let activeSorter = null;
+let filters = [];
 
 $(document).ready(function () {
    d3.text(DataSource)
@@ -29,8 +40,7 @@ $(document).ready(function () {
       .then(reloadCharts);
 });
 
-let filters = [];
-
+// 表示項目ボタンの作成
 function updateSwitcher() {
    let categories = getDataCategories();
    categories = categories.filter((data) => {
@@ -80,6 +90,7 @@ function updateSwitcher() {
       .text((d) => d);
 }
 
+// 並び替えボタンの作成
 function updateSorter() {
    let categories = getDataCategories();
    d3.select("#sorter")
@@ -105,13 +116,14 @@ function updateSorter() {
       });
 }
 
+// 初期表示の医療機関の選択、表示項目、並び替えを設定
 function selectInitialGraphData() {
    let categories = getDataCategories();
    let index = categories.indexOf(NameMap[DefaultSorter]) + 1;
    let api = $("#data").dataTable().api();
    api.column(index).order('desc').draw();
    api.rows().every(function(index, tableLoop, rowLoop) {
-      if (rowLoop < PlotSample) {
+      if (rowLoop < PlotSample * 0.5) {
          this.select();
       }
    }).draw();
@@ -121,6 +133,7 @@ function selectInitialGraphData() {
       .classed('btn-primary', true);
 }
 
+// データテーブルの作成
 function readyUpdate() {
    const table = $("#data").DataTable({
       dom: "Bfrtip",
@@ -148,6 +161,7 @@ function readyUpdate() {
    });
 }
 
+// グラフ表示の更新
 function reloadCharts() {
    const hospitalNames = getHospitalNames().slice(0, PlotSample);
 
@@ -158,6 +172,7 @@ function reloadCharts() {
    updateCounter(hospitalNames.length);
 }
 
+// データリストからカテゴリーを取得
 function getDataCategories() {
    var categories = [];
    var api = $("#data").dataTable().api();
@@ -172,6 +187,7 @@ function getDataCategories() {
    return categories;
 }
 
+// データリストから医療機関名を取得
 function getHospitalNames() {
    // table.rows( { selected: true } );
 
@@ -186,6 +202,7 @@ function getHospitalNames() {
    return names;
 }
 
+// データリストから移植数を取得
 function getEtCount() {
    var stats = [];
    var api = $("#data").dataTable().api();
@@ -198,6 +215,7 @@ function getEtCount() {
    return stats;
 }
 
+// データリストから妊娠数を取得
 function getPregCount() {
    var stats = [];
    var api = $("#data").dataTable().api();
@@ -210,6 +228,7 @@ function getPregCount() {
    return stats;
 }
 
+// データリストから分娩率を取得
 function getBirthRate() {
    var stats = [];
    var api = $("#data").dataTable().api();
@@ -222,6 +241,7 @@ function getBirthRate() {
    return stats;
 }
 
+// グラフの更新
 function updateCharts(hospitalNames, etCount, pregCount, birthRate) {
    let series = [
       {
@@ -246,7 +266,7 @@ function updateCharts(hospitalNames, etCount, pregCount, birthRate) {
       return filters.includes(data.name);
    });
 
-   const chart = Highcharts.chart("container", {
+   Highcharts.chart("container", {
       chart: {
          type: "column"
       },
@@ -279,12 +299,14 @@ function updateCharts(hospitalNames, etCount, pregCount, birthRate) {
    });
 }
 
+// 表示件数の更新
 function updateCounter(count) {
    let max = $("#data").dataTable().api().rows().count();
    $("#counter_current").text(count + " / " + max + "件");
    $("#counter_max").text(PlotSample);
 }
 
+// TSVをテーブルに変換
 function tabulate(data) {
    const table = d3.select("table");
    const thead = table.append("thead");
