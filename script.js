@@ -266,7 +266,7 @@ function updateCharts(hospitalNames, etCount, pregCount, birthRate) {
       return filters.includes(data.name);
    });
 
-   const chart = Highcharts.chart("container", {
+   Highcharts.chart("container", {
       chart: {
          type: "column"
       },
