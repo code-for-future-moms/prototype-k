@@ -1,4 +1,4 @@
-const PlotSample = 7;
+const PlotSample = 20;
 const DataSource = 'https://raw.githubusercontent.com/sunmoonStern/funin-open-data/main/hospital-data-address.tsv'
 const NameMap = {
    'et_count': '移植数',
@@ -155,6 +155,7 @@ function reloadCharts() {
    const pregCount = getPregCount().slice(0, PlotSample);
    const birthRate = getBirthRate().slice(0, PlotSample);
    updateCharts(hospitalNames, etCount, pregCount, birthRate);
+   updateCounter(hospitalNames.length);
 }
 
 function getDataCategories() {
@@ -276,6 +277,12 @@ function updateCharts(hospitalNames, etCount, pregCount, birthRate) {
       }],
       series: series,
    });
+}
+
+function updateCounter(count) {
+   let max = $("#data").dataTable().api().rows().count();
+   $("#counter_current").text(count + " / " + max + "件");
+   $("#counter_max").text(PlotSample);
 }
 
 function tabulate(data) {

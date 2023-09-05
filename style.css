@@ -13,6 +13,10 @@ body {
    margin: 0px 2px;
 }
 
+#counter {
+   font-size: 90%;
+}
+
 div.checkbox {
    cursor: pointer;
    margin: 0px 4px;
