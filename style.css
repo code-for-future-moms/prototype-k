@@ -1,6 +1,7 @@
 
 body {
    margin: 1em;
+   background-color: #f8f9fa;
 }
 
 .btn:focus {
@@ -27,3 +28,11 @@ div.checkbox.checked {
    opacity: 1.0;
 }
 
+div.contents {
+   background-color: #ffffff;
+   border: 1px solid #e0e0e0;
+   border-radius: 4px;
+   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
+   padding: 1em;
+   margin: 1em 0px;
+}
