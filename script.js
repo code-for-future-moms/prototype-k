@@ -37,24 +37,19 @@ function updateSwitcher() {
       return data != NameMap['birth_count'];
    });
 
+   filters = [...categories.filter((data) => { return DefaultSwitchers.includes(data); })];
+
    const switcher = d3.select("#switcher")
       .selectAll("div")
       .data(categories)
       .enter()
       .append("div")
-      .attr("class", "form-check form-check-inline");
-
-   filters = [...categories.filter((data) => { return DefaultSwitchers.includes(data); })];
-   switcher.append("input")
-      .attr("type", "checkbox")
-      .property("checked", (d) => {
-         return filters.includes(d);
+      .attr("class", function(d) {
+         return filters.includes(d) ? "checkbox checked" : "checkbox";
       })
-      .attr("class", "form-check-input")
-      .attr("id", (_, i) => 'check-box-' + i)
-      .attr("value", (d) => d)
-      .on("change", function(_, d) {
-         if (this.checked) {
+      .on("click", function(_, d) {
+         let checked = !d3.select(this).classed("checked");
+         if (checked) {
             filters.push(d);
          } else {
             const index = filters.indexOf(d);
@@ -62,6 +57,7 @@ function updateSwitcher() {
                filters.splice(index, 1);
             }
          }
+         d3.select(this).classed("checked", checked);
          reloadCharts();
       });
 
@@ -80,11 +76,8 @@ function updateSwitcher() {
       .attr("r", 6)
       .attr("fill", (d) => colorMapJP[d]);
 
-   switcher.append("label")
-      .attr("class", "form-check-label")
-      .attr("for", (_, i) => 'check-box-' + i)
+   switcher.append("span")
       .text((d) => d);
-
 }
 
 function updateSorter() {
