@@ -13,6 +13,10 @@ body {
    margin: 0px 2px;
 }
 
+#switcher, #sorter {
+   margin: 0px 0px 0.5em 0px;
+}
+
 #counter {
    font-size: 90%;
 }
