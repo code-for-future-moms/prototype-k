@@ -18,12 +18,12 @@ body {
    box-shadow: none !important;
 }
 
-#sorter input {
-   margin: 0px 2px;
-}
-
 #switcher, #sorter {
    margin: 0px 0px 0.5em 0px;
+}
+
+#switcher .label, #sorter .label {
+   font-size: 80%;
 }
 
 #counter {

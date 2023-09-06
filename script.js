@@ -94,19 +94,22 @@ function updateSwitcher() {
 function updateSorter() {
    let categories = getDataCategories();
    d3.select("#sorter")
-      .selectAll("input")
+      .append("div")
+      .attr("class", "btn-group btn-group-sm")
+      .attr("role", "group")
+      .selectAll("button")
       .data(categories)
       .enter()
-      .append("input")
+      .append("button")
       .attr("type", "button")
-      .attr("class", "btn btn-outline-secondary btn-sm")
-      .attr("value", (d) => d)
+      .attr("class", "btn btn-outline-secondary")
+      .text((d) => d)
       .on("click", function (d) {
          if (activeSorter) {
-            activeSorter.classed("btn-primary", false).classed("btn-outline-secondary", true);
+            activeSorter.classed("btn-secondary", false).classed("btn-outline-secondary", true);
          }
          activeSorter = d3.select(this);
-         activeSorter.classed("btn-outline-secondary", false).classed("btn-primary", true);
+         activeSorter.classed("btn-outline-secondary", false).classed("btn-secondary", true);
 
          let sorter = d.target.value;
          let index = categories.indexOf(sorter) + 1;
@@ -128,9 +131,10 @@ function selectInitialGraphData() {
       }
    }).draw();
 
-   activeSorter = d3.select('input.btn.btn-sm[value="'+NameMap[DefaultSorter]+'"]')
-      .classed('btn-outline-secondary', false)
-      .classed('btn-primary', true);
+   activeSorter = d3.selectAll('button.btn').filter(function(d) {
+      return (d === NameMap[DefaultSorter]);
+   }).classed('btn-outline-secondary', false)
+      .classed('btn-secondary', true);
 }
 
 // データテーブルの作成
