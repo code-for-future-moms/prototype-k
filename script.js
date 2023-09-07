@@ -104,14 +104,14 @@ function updateSorter() {
       .attr("type", "button")
       .attr("class", "btn btn-outline-secondary")
       .text((d) => d)
-      .on("click", function (d) {
+      .on("click", function (_) {
          if (activeSorter) {
             activeSorter.classed("btn-secondary", false).classed("btn-outline-secondary", true);
          }
          activeSorter = d3.select(this);
          activeSorter.classed("btn-outline-secondary", false).classed("btn-secondary", true);
 
-         let sorter = d.target.value;
+         let sorter = this.innerText;
          let index = categories.indexOf(sorter) + 1;
          var api = $("#data").dataTable().api();
          api.column(index).order('desc').draw();
