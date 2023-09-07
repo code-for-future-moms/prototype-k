@@ -146,8 +146,10 @@ function readyUpdate() {
          style: "multi"
       },
       language: {
-         search: "クリニック名や住所で検索→"
+         search: "検索: "
       },
+      info: false,
+      pageLength: PlotSample,
       buttons: [
          {
             text: "グラフ更新",
