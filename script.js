@@ -298,6 +298,7 @@ function updateCharts(hospitalNames, etCount, pregCount, birthRate) {
             text: filters.includes(NameMap["birth_ratio"]) ? NameMap["birth_ratio"] : "",
          },
          opposite: true,
+         max: 100,
       }],
       series: series,
    });
