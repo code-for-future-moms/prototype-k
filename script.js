@@ -1,5 +1,6 @@
 // データ
-const DataSource = 'https://raw.githubusercontent.com/sunmoonStern/funin-open-data/main/hospital-data-address.tsv'
+const DataSource = 'https://raw.githubusercontent.com/code-for-future-moms/fetch-open-data/main/data/hospital-data-address-R40620.tsv';
+
 
 // 医療機関の最大選択数
 const PlotSample = 20;
