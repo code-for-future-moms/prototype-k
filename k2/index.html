@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="http://localhost:35730/livereload.js"></script>
+
+      <script src="https://d3js.org/d3.v6.js" charset="utf-8"></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.js" charset="utf-8"></script>
+      <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" charset="utf-8"> </script>
+      <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js" charset="utf-8"> </script>
+      <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js" charset="utf-8"> </script>
+      <script src="https://code.highcharts.com/highcharts.js"></script>
+      <script src="script.js"></script>
+
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="./style.css" />
+
+      <title>医療機関ごとの体外受精の治療成績</title>
+   </head>
+
+   <body>
+      <h1>医療機関ごとの体外受精の治療成績</h1>
+
+      <div class="contents">
+         <h2>データ表示地域の選択</h2>
+
+         <div>
+
+            <span>
+               北海道・東北
+            </span>
+
+            北海道 青森 岩手 秋田 宮城 山形 福島
+         </div>
+
+         <div>
+
+            <span>
+               関東
+            </span>
+
+            東京 神奈川 埼玉 千葉 茨城 栃木 群馬
+         </div>
+
+         <div>
+
+            <span>
+               中部・北陸
+            </span>
+
+            愛知 岐阜 静岡 三重 新潟 山梨 長野 石川 富山 福井
+         </div>
+
+         <div>
+
+            <span>
+               関西
+            </span>
+
+            大阪 兵庫 京都 滋賀 奈良 和歌山
+         </div>
+
+         <div>
+
+            <span>
+               中国・四国
+            </span>
+
+            岡山 広島 鳥取 島根 山口 香川 徳島 愛媛 高知
+         </div>
+
+         <div>
+
+            <span>
+               九州・沖縄
+            </span>
+
+            福岡 佐賀 長崎 熊本 大分 宮崎 鹿児島 沖縄
+         </div>
+      </div>
+
+      <div class="contents">
+         <h2>グラフ比較</h2>
+         <div id="sorter"></div>
+
+         <div id="container" style="width: 95%; height: 900px;"></div>
+      </div>
+
+      <div class="contents">
+         <h2>データ詳細</h2>
+         <table id="data" class="display"></table>
+      </div>
+
+      <div id="footer">
+         <ul>
+            <li>データソース： <a href="https://www.fukushihoken.metro.tokyo.lg.jp/kodomo/kosodate/josei/funin/shiteiiryou-jouhoukoukai.html" target="_blank">東京都特定不妊治療費助成事業指定医療機関の情報公開（2019年1月から12月分）</a></li>
+            <li>加工済データ： <a href="https://raw.githubusercontent.com/code-for-future-moms/fetch-open-data/main/data/hospital-data-address-R40620.tsv">https://raw.githubusercontent.com/code-for-future-moms/fetch-open-data/main/data/hospital-data-address-R40620.tsv</a></li>
+            <li>補足：数字が自動抽出できなかった医療機関や移植数/生産数が移植あたり生産率と等しくなっていない医療機関は除外しています</li>
+         </ul>
+      </div>
+   </body>
+</html>
+
