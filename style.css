@@ -1,63 +1,65 @@
 h1 {
-   color: #333333;
-   font-size: 2em;
+  color: #333333;
+  font-size: 2em;
 }
 
 h2 {
-   color: #333333;
-   font-size: 1.5em;
+  color: #333333;
+  font-size: 1.5em;
 }
 
 body {
-   margin: 1em;
-   background-color: #f8f9f9;
+  margin: 1em;
+  background-color: #f8f9f9;
 }
 
 .btn:focus {
-   outline: none !important;
-   box-shadow: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-#switcher, #sorter {
-   margin: 0px 0px 0.5em 0px;
+#switcher,
+#sorter {
+  margin: 0px 0px 0.5em 0px;
 }
 
-#switcher .label, #sorter .label {
-   font-size: 80%;
+#switcher .label,
+#sorter .label {
+  font-size: 80%;
 }
 
 #counter {
-   font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 #data {
-   font-size: 0.9em;
+  font-size: 0.9em;
 }
 
 #footer {
-   font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 div.checkbox {
-   cursor: pointer;
-   margin: 0px 4px;
-   display: inline-flex;
-   align-items: center;
+  cursor: pointer;
+  margin: 0px 4px;
+  display: inline-flex;
+  align-items: center;
 }
 
 div.checkbox {
-   opacity: 0.4;
+  opacity: 0.4;
 }
 
 div.checkbox.checked {
-   opacity: 1.0;
+  opacity: 1;
 }
 
 div.contents {
-   background-color: #ffffff;
-   border: 1px solid #e0e0e0;
-   border-radius: 4px;
-   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
-   padding: 1em;
-   margin: 1em 0px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
+  padding: 1em;
+  margin: 1em 0px;
 }
