@@ -1,0 +1,42 @@
+h1 {
+   color: #333333;
+   font-size: 2em;
+}
+
+h2 {
+   color: #333333;
+   font-size: 1.5em;
+}
+
+body {
+   margin: 1em;
+   background-color: #f8f9f9;
+}
+
+.btn:focus {
+   outline: none !important;
+   box-shadow: none !important;
+}
+
+#sorter {
+   display: flex;
+   justify-content: center;
+   margin: 0px 0px 0.5em 0px;
+}
+
+#data {
+   font-size: 0.9em;
+}
+
+#footer {
+   font-size: 0.8em;
+}
+
+div.contents {
+   background-color: #ffffff;
+   border: 1px solid #e0e0e0;
+   border-radius: 4px;
+   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
+   padding: 1em;
+   margin: 1em 0px;
+}
