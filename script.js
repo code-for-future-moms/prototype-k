@@ -10,7 +10,7 @@ const NameMap = {
    'et_count': '移植数',
    'preg_count': '妊娠数',
    'birth_count': '分娩数',
-   'birth_ratio': '分娩率'
+   'birth_ratio': '分娩率(%)'
 };
 
 // グラフの色
