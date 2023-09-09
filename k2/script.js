@@ -9,8 +9,7 @@ const PlotSample = 20;
 const NameMap = {
   et_count: "移植数",
   preg_count: "妊娠数",
-  birth_count: "分娩数",
-  birth_ratio: "分娩率(%)",
+  birth_ratio: "分娩率",
 };
 
 // グラフの色
@@ -96,12 +95,10 @@ $(document).ready(function () {
 
 // 並び替えボタンの作成
 function updateSorter() {
-  let mapJP = {};
+  let categories = [];
   for (const key in NameMap) {
-    mapJP[NameMap[key]] = key;
+    categories.push(key);
   }
-
-  let categories = getDataCategories();
   d3.select("#sorter")
     .append("div")
     .attr("class", "btn-group btn-group-sm")
@@ -112,8 +109,8 @@ function updateSorter() {
     .append("button")
     .attr("type", "button")
     .attr("class", "btn btn-outline-secondary")
-    .attr("value", (d) => d)
-    .text((d) => d + "トップ" + PlotSample)
+    .attr("value", (key) => key)
+    .text((key) => NameMap[key] + "順")
     .on("click", function (_) {
       if (activeSorter) {
         activeSorter
@@ -126,25 +123,21 @@ function updateSorter() {
         .classed("btn-secondary", true);
 
       let sorter = this.value;
-      hospitalStore = hospitalStore.sorted(mapJP[sorter]);
+      hospitalStore = hospitalStore.sorted(sorter);
       reloadCharts();
     });
 }
 
-// 初期表示の医療機関の選択、表示項目、並び替えを設定
+// 初期表示の医療機関の選択
 function selectInitialGraphData() {
-  let categories = getDataCategories();
-  let index = categories.indexOf(NameMap[DefaultSorter]) + 1;
-  let api = $("#data").dataTable().api();
-  api.column(index).order("desc").draw();
-
   activeSorter = d3
     .selectAll("button.btn")
     .filter(function (d) {
-      return d === NameMap[DefaultSorter];
+      return d === DefaultSorter;
     })
     .classed("btn-outline-secondary", false)
     .classed("btn-secondary", true);
+  hospitalStore = hospitalStore.sorted(DefaultSorter);
 }
 
 // データテーブルの作成
@@ -165,26 +158,7 @@ function readyUpdate() {
 // グラフ表示の更新
 function reloadCharts() {
   const store = new HospitalStore(hospitalStore.hospitals.slice(0, PlotSample));
-  updateCharts(store);
-}
 
-// データリストからカテゴリーを取得
-function getDataCategories() {
-  var categories = [];
-  var api = $("#data").dataTable().api();
-
-  var headers = api.columns().header().toArray();
-  headers.forEach(function (heading, index) {
-    if (index > 0 && index < headers.length - 1) {
-      categories.push($(heading).html());
-    }
-  });
-
-  return categories;
-}
-
-// グラフの更新
-function updateCharts(store) {
   const hospitalNames = store.getHospitalNamesWithAddress();
   const etCount = store.getEtCount();
   const pregCount = store.getPregCount();
@@ -229,7 +203,7 @@ function updateCharts(store) {
       },
       {
         title: {
-          text: NameMap["birth_ratio"],
+          text: NameMap["birth_ratio"] + "(%)",
         },
         opposite: true,
         max: 100,
