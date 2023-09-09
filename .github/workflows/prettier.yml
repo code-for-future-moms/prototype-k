@@ -3,9 +3,6 @@ name: Prettier
 on:
   pull_request:
 
-env:
-  FILE_PATTERN: "**/*.{js,css}"
-
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -14,17 +11,19 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
+
       - uses: actions/setup-node@v1
         with:
           node-version: 19.x
       - name: Run Prettier
         run: |
           yarn install
-          yarn prettier --write ${FILE_PATTERN}
+          yarn prettier --write '*.{js,css} */*.{js,css}'
+
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: 'chore: apply prettier change'
-
+          file_pattern: '*.{js,css} */*.{js,css}'
