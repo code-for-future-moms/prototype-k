@@ -54,7 +54,7 @@ class HospitalStore {
   }
 
   getHospitalNamesWithAddress() {
-    return this.hospitals.map((h) => "【" + h.shortAddress() + "】" + h.name);
+    return this.hospitals.map((h) => h.shortAddress() + "：" + h.name);
   }
 
   getEtCount() {
