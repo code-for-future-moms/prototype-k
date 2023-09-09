@@ -21,9 +21,9 @@ jobs:
       - name: Run Prettier
         run: |
           yarn install
-          yarn prettier --write '*.{js,css} */*.{js,css}'
+          yarn prettier --write *.{js,css} */*.{js,css}
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: 'chore: apply prettier change'
-          file_pattern: '*.{js,css} */*.{js,css}'
+          file_pattern: '*.js */*.js *.css */*.css'
