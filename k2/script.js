@@ -192,7 +192,7 @@ function reloadCharts() {
     chart: {
       type: "column",
       scrollablePlotArea: {
-        minWidth: hospitalNames.length * 36 + 80,
+        minWidth: hospitalNames.length * 36,
       },
     },
     title: {
