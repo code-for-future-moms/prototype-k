@@ -2,7 +2,10 @@
 const DataSource =
   "https://raw.githubusercontent.com/code-for-future-moms/fetch-open-data/main/data/hospital-data-address-R40620.tsv";
 
-// 医療機関の表示数
+// グラフの表示最大件数
+const GraphSample = 100;
+
+// テーブルの1ページの表示数
 const PlotSample = 20;
 
 // TSVのヘッダーと日本語名の対応
@@ -157,7 +160,9 @@ function readyUpdate() {
 
 // グラフ表示の更新
 function reloadCharts() {
-  const store = new HospitalStore(hospitalStore.hospitals.slice(0, PlotSample));
+  const store = new HospitalStore(
+    hospitalStore.hospitals.slice(0, GraphSample)
+  );
 
   const hospitalNames = store.getHospitalNamesWithAddress();
   const etCount = store.getEtCount();
@@ -186,6 +191,9 @@ function reloadCharts() {
   Highcharts.chart("container", {
     chart: {
       type: "column",
+      scrollablePlotArea: {
+        minWidth: hospitalNames.length * 36 + 80,
+      },
     },
     title: {
       text: "",
@@ -194,6 +202,18 @@ function reloadCharts() {
     xAxis: {
       categories: hospitalNames,
       crosshair: true,
+      labels: {
+        align: "left",
+        distance: 0,
+        allowOverlap: true,
+        step: 1,
+        overflow: "justify",
+        style: {
+          fontSize: "75%",
+          textOverflow: "none",
+          writingMode: "vertical-rl",
+        },
+      },
     },
     yAxis: [
       {
