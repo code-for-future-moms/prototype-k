@@ -49,12 +49,16 @@ class HospitalStore {
     return new HospitalStore(sorted);
   }
 
+  hospitalWithKey(key) {
+    return this.hospitals.find((h) => h.graphName() === key);
+  }
+
   getHospitalNames() {
     return this.hospitals.map((h) => h.name);
   }
 
   getHospitalNamesWithAddress() {
-    return this.hospitals.map((h) => h.shortAddress() + "：" + h.name);
+    return this.hospitals.map((h) => h.graphName());
   }
 
   getEtCount() {
@@ -82,6 +86,10 @@ class Hospital {
 
   shortAddress() {
     return this.address.replace(/^(.+?[都道府県])?(.+?[市区町村]).*/g, "$1$2");
+  }
+
+  graphName() {
+    return this.shortAddress() + "：" + this.name;
   }
 }
 
@@ -230,6 +238,34 @@ function reloadCharts() {
       },
     ],
     series: series,
+    tooltip: {
+      stickOnContact: true,
+      formatter: function () {
+        const k = store.hospitalWithKey(this.key);
+        return (
+          "<b>" +
+          k.name +
+          "</b><br />" +
+          this.points
+            .map(function (p) {
+              return (
+                '&nbsp;<span style="color:' +
+                p.color +
+                '">\u25CF</span> ' +
+                p.series.name +
+                ": <b>" +
+                p.y +
+                "</b><br />"
+              );
+            })
+            .join("") +
+          "<span style='font-size:0.9em'>\uD83D\uDCCD " +
+          k.address +
+          "</span>"
+        );
+      },
+      shared: true,
+    },
   });
 }
 
