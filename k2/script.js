@@ -49,12 +49,16 @@ class HospitalStore {
     return new HospitalStore(sorted);
   }
 
+  hospitalWithKey(key) {
+    return this.hospitals.find((h) => h.graphName() === key);
+  }
+
   getHospitalNames() {
     return this.hospitals.map((h) => h.name);
   }
 
   getHospitalNamesWithAddress() {
-    return this.hospitals.map((h) => h.shortAddress() + "：" + h.name);
+    return this.hospitals.map((h) => h.graphName());
   }
 
   getEtCount() {
