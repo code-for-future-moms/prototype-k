@@ -83,6 +83,10 @@ class Hospital {
   shortAddress() {
     return this.address.replace(/^(.+?[都道府県])?(.+?[市区町村]).*/g, "$1$2");
   }
+
+  graphName() {
+    return this.shortAddress() + "：" + this.name;
+  }
 }
 
 $(document).ready(function () {
