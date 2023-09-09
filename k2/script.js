@@ -238,6 +238,34 @@ function reloadCharts() {
       },
     ],
     series: series,
+    tooltip: {
+      stickOnContact: true,
+      formatter: function () {
+        const k = store.hospitalWithKey(this.key);
+        return (
+          "<b>" +
+          k.name +
+          "</b><br />" +
+          this.points
+            .map(function (p) {
+              return (
+                '&nbsp;<span style="color:' +
+                p.color +
+                '">\u25CF</span> ' +
+                p.series.name +
+                ": <b>" +
+                p.y +
+                "</b><br />"
+              );
+            })
+            .join("") +
+          "<span style='font-size:0.9em'>\uD83D\uDCCD " +
+          k.address +
+          "</span>"
+        );
+      },
+      shared: true,
+    },
   });
 }
 
