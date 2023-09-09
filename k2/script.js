@@ -169,7 +169,7 @@ function readyUpdate() {
 // グラフ表示の更新
 function reloadCharts() {
   const store = new HospitalStore(
-    hospitalStore.hospitals.slice(0, GraphSample)
+    hospitalStore.hospitals.slice(0, GraphSample),
   );
 
   const hospitalNames = store.getHospitalNamesWithAddress();
@@ -285,8 +285,8 @@ function dataStore(data) {
         parseInt(row[2]),
         parseInt(row[3]),
         parseFloat(row[4]),
-        row[5]
-      )
+        row[5],
+      ),
     );
   });
   hospitalStore = new HospitalStore(hospitals);
