@@ -52,9 +52,7 @@ class HospitalStore {
   }
 
   getHospitalNamesWithAddress() {
-    return this.hospitals.map(
-      (h) => h.name + "<br />【" + h.shortAddress() + "】"
-    );
+    return this.hospitals.map((h) => "【" + h.shortAddress() + "】" + h.name);
   }
 
   getEtCount() {
@@ -213,7 +211,7 @@ function updateCharts(store) {
 
   Highcharts.chart("container", {
     chart: {
-      type: "bar",
+      type: "column",
     },
     title: {
       text: "",
@@ -228,12 +226,12 @@ function updateCharts(store) {
         title: {
           text: "",
         },
-        opposite: true,
       },
       {
         title: {
           text: NameMap["birth_ratio"],
         },
+        opposite: true,
         max: 100,
       },
     ],
