@@ -63,3 +63,23 @@ div.contents {
   padding: 1em;
   margin: 1em 0px;
 }
+
+#container {
+  width: 100%;
+  height: 400px;
+  margin: 0px auto;
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    margin: 0 0.5em;
+  }
+
+  body {
+    margin: 1em 0em;
+  }
+
+  div.contents {
+    border-radius: 0px;
+  }
+}
