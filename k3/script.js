@@ -98,7 +98,8 @@ class Hospital {
   }
 
   graphName() {
-    return this.shortAddress() + "：" + this.name;
+    // クリニック名を読みやすく
+    return this.shortAddress().padEnd(20, " ") + "▼" + this.name;
   }
 }
 
