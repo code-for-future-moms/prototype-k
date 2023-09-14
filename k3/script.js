@@ -98,8 +98,8 @@ class Hospital {
   }
 
   graphName() {
-    // クリニック名を読みやすく
-    return this.shortAddress().padEnd(20, " ") + "▼" + this.name;
+    // クリニック名を読みやすく 住所が先 クリニック名先にすると幅そろえが困難
+    return this.shortAddress().padEnd(8, "　") + "▼" + "　" + this.name;
   }
 }
 
@@ -114,6 +114,18 @@ $(document).ready(function () {
     .then(reloadPerGraph)
     .then(reloadNumGraph);
 });
+
+function count (str) {
+
+  let len = 0;
+
+  for (let i = 0; i < str.length; i++) {
+  (str[i].match(/[ -~]/)) ? len += 1 : len += 2;
+  }
+
+  return len;
+
+}
 
 // 並び替えボタンの作成
 function updateSorter() {
