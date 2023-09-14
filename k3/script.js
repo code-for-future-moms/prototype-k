@@ -115,16 +115,14 @@ $(document).ready(function () {
     .then(reloadNumGraph);
 });
 
-function count (str) {
-
+function count(str) {
   let len = 0;
 
   for (let i = 0; i < str.length; i++) {
-  (str[i].match(/[ -~]/)) ? len += 1 : len += 2;
+    str[i].match(/[ -~]/) ? (len += 1) : (len += 2);
   }
 
   return len;
-
 }
 
 // 並び替えボタンの作成
