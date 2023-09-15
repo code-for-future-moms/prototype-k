@@ -57,6 +57,14 @@ section p {
 
 .checkbox-item {
   font-size: 0.8rem;
+  margin: 0 10px 0 20px;
+}
+
+.list-checkbox-item {
+  width: 30%;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
 }
 
 .btn:focus {
