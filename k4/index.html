@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://d3js.org/d3.v6.js" charset="utf-8"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" charset="utf-8"></script>
+  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" charset="utf-8"></script>
+  <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js" charset="utf-8"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js" charset="utf-8"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="script.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>医療機関ごとの体外受精の治療成績</h1>
+  </header>
+
+  <section class="chart-section">
+    <h3>移植から出産まで至った割合（生産分娩率）</h3>
+    <p>
+      生産分娩数/移植数✕100で算出（死産は除く）。35歳以上40歳未満の女性に対して凍結胚を用いた治療成績比較。
+    </p>
+    <div id="ratio-chart-sorter">並べ替え：</div>
+    <div class="chart-scroller">
+      <div id="ratio-chart-container" class="chart-container"></div>
+    </div>
+  </section>
+
+  <section class="chart-section">
+    <h3>移植数・妊娠数・生産分娩数</h3>
+    <p>35歳以上40歳未満の女性に対して凍結胚を用いた治療成績比較。</p>
+    <div id="count-chart-switcher">表示項目：</div>
+    <div id="count-chart-sorter">並べ替え：</div>
+    <div class="chart-scroller">
+      <div id="count-chart-container" class="chart-container"></div>
+    </div>
+  </section>
+
+  <section class="area-filter">
+    <h3>エリアで絞り込み</h3>
+    <div id="area">
+      <input type="checkbox" name="ar" value="千代田区">千代田区
+      <input type="checkbox" name="ar" value="中央区">中央区
+      <input type="checkbox" name="ar" value="港区">港区
+      <input type="checkbox" name="ar" value="新宿区">新宿区
+    </div>
+  </section>
+
+  <section>
+    <h3>元データ</h3>
+    <p>
+      元データを表示します。検索ボックスに医療機関の名前や住所を入力して絞りこんだり、△をクリックして並べ替えたりしてグラフで表示したい医療機関を見つけてください。
+    </p>
+    <table id="data" class="display"></table>
+  </section>
+  <div id="footer">
+    <ul>
+      <li>データソース： <a href="https://www.fukushihoken.metro.tokyo.lg.jp/kodomo/kosodate/josei/funin/shiteiiryou-jouhoukoukai.html" target="_blank">東京都特定不妊治療費助成事業指定医療機関の情報公開（2019年1月から12月分）</a></li>
+      <li>加工済データ： <a href="https://github.com/code-for-future-moms/fetch-open-data/blob/main/data/hospital-data-address-R40620.tsv">https://github.com/code-for-future-moms/fetch-open-data/blob/main/data/hospital-data-address-R40620.tsv</a></li>
+      <li>補足：数字が自動抽出できなかった医療機関や移植数/生産数が移植あたり生産率と等しくなっていない医療機関は除外しています</li>
+    </ul>
+  </div>
+</body>
+
+</html>
