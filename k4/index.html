@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://d3js.org/d3.v6.js" charset="utf-8"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" charset="utf-8"></script>
+  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" charset="utf-8"></script>
+  <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js" charset="utf-8"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js" charset="utf-8"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="script.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>医療機関ごとの体外受精の治療成績</h1>
+  </header>
+
+  <section class="chart-section">
+    <h3>移植から出産まで至った割合（生産分娩率）</h3>
+    <p>
+      生産分娩数/移植数✕100で算出（死産は除く）。35歳以上40歳未満の女性に対して凍結胚を用いた治療成績比較。
+    </p>
+    <div class="chart-scroller">
+      <div id="ratio-chart-container" class="chart-container"></div>
+    </div>
+  </section>
+
+  <section class="chart-section">
+    <h3>移植数・妊娠数・生産分娩数</h3>
+    <p>35歳以上40歳未満の女性に対して凍結胚を用いた治療成績比較。</p>
+    <div id="count-chart-switcher">表示項目：</div>
+    <div id="count-chart-sorter">並べ替え：</div>
+    <div class="chart-scroller">
+      <div id="count-chart-container" class="chart-container"></div>
+    </div>
+  </section>
+
+  <section class="area-filter">
+    <h3>エリアで絞り込み</h3>
+    <ul class="list-checkbox-item">
+      <li><input type="checkbox" name="ar" value="千代田区" id="13101" class="checkbox-item"><label for="13101">千代田区 (4)</label></li>
+      <li><input type="checkbox" name="ar" value="中央区" id="13102" class="checkbox-item"><label for="13102">中央区 (8)</label></li>
+      <li><input type="checkbox" name="ar" value="港区" id="13103" class="checkbox-item"><label for="13103">港区 (18)</label></li>
+      <li><input type="checkbox" name="ar" value="新宿区" id="13104" class="checkbox-item"><label for="13104">新宿区 (9)</label></li>
+      <li><input type="checkbox" name="ar" value="文京区" id="13105" class="checkbox-item"><label for="13105">文京区 (3)</label></li>
+      <li><input type="checkbox" name="ar" value="台東区" id="13106" class="checkbox-item"><label for="13106">台東区 (1)</label></li>
+      <li><input type="checkbox" name="ar" value="墨田区" id="13107" class="checkbox-item"><label for="13107">墨田区 (1)</label></li>
+      <li><input type="checkbox" name="ar" value="江東区" id="13108" class="checkbox-item"><label for="13108">江東区 (2)</label></li>
+      <li><input type="checkbox" name="ar" value="品川区" id="13109" class="checkbox-item"><label for="13109">品川区 (1)</label></li>
+      <li><input type="checkbox" name="ar" value="目黒区" id="13110" class="checkbox-item"><label for="13110">目黒区 (3)</label></li>
+      <li><input type="checkbox" name="ar" value="大田区" id="13111" class="checkbox-item"><label for="13111">大田区 (2)</label></li>
+      <li><input type="checkbox" name="ar" value="世田谷区" id="13112" class="checkbox-item"><label for="13112">世田谷区 (4)</label></li>
+      <li><input type="checkbox" name="ar" value="渋谷区" id="13113" class="checkbox-item"><label for="13113">渋谷区 (2)</label></li>
+      <li><input type="checkbox" name="ar" value="杉並区" id="13115" class="checkbox-item"><label for="13115">杉並区 (2)</label></li>
+      <li><input type="checkbox" name="ar" value="豊島区" id="13116" class="checkbox-item"><label for="13116">豊島区 (2)</label></li>
+      <li><input type="checkbox" name="ar" value="北区" id="13117" class="checkbox-item"><label for="13117">北区 (1)</label></li>
+      <li><input type="checkbox" name="ar" value="板橋区" id="13119" class="checkbox-item"><label for="13119">板橋区 (1)</label></li>
+      <li><input type="checkbox" name="ar" value="練馬区" id="13120" class="checkbox-item"><label for="13120">練馬区 (1)</label></li>
+      <li><input type="checkbox" name="ar" value="足立区" id="13121" class="checkbox-item"><label for="13121">足立区 (2)</label></li>
+      <li><input type="checkbox" name="ar" value="立川市" id="13202" class="checkbox-item"><label for="13202">立川市 (1)</label></li>
+      <li><input type="checkbox" name="ar" value="武蔵野市" id="13203" class="checkbox-item"><label for="13203">武蔵野市 (2)</label></li>
+      <li><input type="checkbox" name="ar" value="三鷹市" id="13204" class="checkbox-item"><label for="13204">三鷹市 (1)</label></li>
+      <li><input type="checkbox" name="ar" value="府中市" id="13206" class="checkbox-item"><label for="13206">府中市 (1)</label></li>
+      <li><input type="checkbox" name="ar" value="調布市" id="13208" class="checkbox-item"><label for="13208">調布市 (2)</label></li>
+      <li><input type="checkbox" name="ar" value="町田市" id="13209" class="checkbox-item"><label for="13209">町田市 (2)</label></li>
+      <li><input type="checkbox" name="ar" value="国分寺市" id="13214" class="checkbox-item"><label for="13214">国分寺市 (1)</label></li>
+      <li><input type="checkbox" name="ar" value="多摩市" id="13224" class="checkbox-item"><label for="13224">多摩市 (1)</label></li>
+
+    </ul>
+  </section>
+
+  <section>
+    <h3>元データ</h3>
+    <p>
+      元データを表示します。検索ボックスに医療機関の名前や住所を入力して絞りこんだり、△をクリックして並べ替えたりしてグラフで表示したい医療機関を見つけてください。
+    </p>
+    <table id="data" class="display"></table>
+  </section>
+  <div id="footer">
+    <ul>
+      <li>データソース： <a href="https://www.fukushihoken.metro.tokyo.lg.jp/kodomo/kosodate/josei/funin/shiteiiryou-jouhoukoukai.html" target="_blank">東京都特定不妊治療費助成事業指定医療機関の情報公開（2019年1月から12月分）</a></li>
+      <li>加工済データ： <a href="https://github.com/code-for-future-moms/fetch-open-data/blob/main/data/hospital-data-address-R40620.tsv">https://github.com/code-for-future-moms/fetch-open-data/blob/main/data/hospital-data-address-R40620.tsv</a></li>
+      <li>補足：数字が自動抽出できなかった医療機関や移植数/生産数が移植あたり生産率と等しくなっていない医療機関は除外しています</li>
+    </ul>
+  </div>
+</body>
+
+</html>
