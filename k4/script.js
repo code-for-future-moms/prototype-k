@@ -6,7 +6,7 @@ const NameMap = {
   preg_count: "妊娠数",
   birth_count: "生産分娩数",
   birth_ratio: "生産分娩率",
-  address: "所在地"
+  address: "所在地",
 };
 
 const DefaultSorter = "et_count";
@@ -15,29 +15,25 @@ let activeRatioChartSorter = null;
 let activeCountChartSorter = null;
 
 $(document).ready(function () {
-  $.fn.dataTable.ext.search.push(function (
-    settings,
-    searchData,
-    index,
-    rowData,
-    counter
-  ) {
-    var areas = $('input:checkbox[name="ar"]:checked')
-      .map(function () {
-        return this.value;
-      })
-      .get();
+  $.fn.dataTable.ext.search.push(
+    function (settings, searchData, index, rowData, counter) {
+      var areas = $('input:checkbox[name="ar"]:checked')
+        .map(function () {
+          return this.value;
+        })
+        .get();
 
-    if (areas.length === 0) {
-      return true;
-    }
+      if (areas.length === 0) {
+        return true;
+      }
 
-    if (areas.indexOf(searchData[6]) !== -1) {
-      return true;
-    }
+      if (areas.indexOf(searchData[6]) !== -1) {
+        return true;
+      }
 
-    return false;
-  });
+      return false;
+    },
+  );
 
   d3.text(DataSource)
     .then(d3.tsvParseRows)
@@ -67,7 +63,7 @@ function update() {
 
 function updateRatioChartSorter() {
   const categories = getDataCategories().filter(
-    (data) => data === NameMap.birth_ratio
+    (data) => data === NameMap.birth_ratio,
   );
   d3.select("#ratio-chart-sorter")
     .selectAll("input")
@@ -179,10 +175,10 @@ function readyUpdate() {
       info: "",
       infoFiltered: "",
       infoPostFix:
-        '<br><a href="https://github.com/code-for-future-moms/prototype-s">GitHub</a><br>'
+        '<br><a href="https://github.com/code-for-future-moms/prototype-s">GitHub</a><br>',
     },
     info: true,
-    columnDefs: [{ targets: [6, 7], visible: false }]
+    columnDefs: [{ targets: [6, 7], visible: false }],
   });
 }
 
@@ -275,7 +271,7 @@ function updateCharts(
   etCount,
   pregCount,
   birthCount,
-  birthRate
+  birthRate,
 ) {
   updateRatioChart(hospitalNames, birthRate);
   updateCountChart(hospitalNames, etCount, pregCount, birthCount);
@@ -285,17 +281,17 @@ function updateRatioChart(hospitalNames, birthRate) {
   const series = [
     {
       name: NameMap.birth_ratio,
-      data: birthRate
-    }
+      data: birthRate,
+    },
   ];
 
   Highcharts.chart("ratio-chart-container", {
     chart: {
-      type: "column"
+      type: "column",
     },
     title: {
       text: "",
-      align: "left"
+      align: "left",
     },
     xAxis: {
       categories: hospitalNames,
@@ -308,22 +304,22 @@ function updateRatioChart(hospitalNames, birthRate) {
         style: {
           fontSize: "9px",
           textOverflow: "none",
-          writingMode: "vertical-rl"
-        }
-      }
+          writingMode: "vertical-rl",
+        },
+      },
     },
     yAxis: {
       title: {
-        text: ""
-      }
+        text: "",
+      },
     },
     colors: ["#F677AD"],
     plotOptions: {
       series: {
-        pointPadding: 0.01
-      }
+        pointPadding: 0.01,
+      },
     },
-    series: series
+    series: series,
   });
 }
 
@@ -331,16 +327,16 @@ function updateCountChart(hospitalNames, etCount, pregCount, birthCount) {
   let series = [
     {
       name: NameMap.et_count,
-      data: etCount
+      data: etCount,
     },
     {
       name: NameMap.preg_count,
-      data: pregCount
+      data: pregCount,
     },
     {
       name: NameMap.birth_count,
-      data: birthCount
-    }
+      data: birthCount,
+    },
   ];
 
   series = series.filter((data) => {
@@ -349,11 +345,11 @@ function updateCountChart(hospitalNames, etCount, pregCount, birthCount) {
 
   Highcharts.chart("count-chart-container", {
     chart: {
-      type: "column"
+      type: "column",
     },
     title: {
       text: "",
-      align: "left"
+      align: "left",
     },
     xAxis: {
       categories: hospitalNames,
@@ -366,22 +362,22 @@ function updateCountChart(hospitalNames, etCount, pregCount, birthCount) {
         style: {
           fontSize: "9px",
           textOverflow: "none",
-          writingMode: "vertical-rl"
-        }
-      }
+          writingMode: "vertical-rl",
+        },
+      },
     },
     yAxis: {
       title: {
-        text: ""
-      }
+        text: "",
+      },
     },
     colors: ["#2CAFFE", "#544FC5", "#6B8ABC"],
     plotOptions: {
       series: {
-        pointPadding: 0.01
-      }
+        pointPadding: 0.01,
+      },
     },
-    series: series
+    series: series,
   });
 }
 
