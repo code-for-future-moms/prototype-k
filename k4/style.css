@@ -55,6 +55,10 @@ section p {
   height: 600px;
 }
 
+.checkbox-item {
+  font-size: 0.8rem;
+}
+
 .btn:focus {
   outline: none !important;
   box-shadow: none !important;
