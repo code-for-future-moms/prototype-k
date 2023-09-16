@@ -288,6 +288,9 @@ function updateRatioChart(hospitalNames, birthRate) {
   Highcharts.chart("ratio-chart-container", {
     chart: {
       type: "column",
+      scrollablePlotArea: {
+        minWidth: hospitalNames.length * 36,
+      },
     },
     title: {
       text: "",
@@ -301,17 +304,22 @@ function updateRatioChart(hospitalNames, birthRate) {
         distance: 0,
         allowOverlap: true,
         step: 1,
+        overflow: "justify",
         style: {
-          fontSize: "9px",
+          fontSize: "75%",
           textOverflow: "none",
           writingMode: "vertical-rl",
         },
       },
     },
     yAxis: {
+      labels: {
+        format: "{text}%",
+      },
       title: {
         text: "",
       },
+      max: 100,
     },
     colors: ["#F677AD"],
     plotOptions: {
@@ -346,6 +354,9 @@ function updateCountChart(hospitalNames, etCount, pregCount, birthCount) {
   Highcharts.chart("count-chart-container", {
     chart: {
       type: "column",
+      scrollablePlotArea: {
+        minWidth: hospitalNames.length * 36,
+      },
     },
     title: {
       text: "",
@@ -359,8 +370,9 @@ function updateCountChart(hospitalNames, etCount, pregCount, birthCount) {
         distance: 0,
         allowOverlap: true,
         step: 1,
+        overflow: "justify",
         style: {
-          fontSize: "9px",
+          fontSize: "75%",
           textOverflow: "none",
           writingMode: "vertical-rl",
         },
