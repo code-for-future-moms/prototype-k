@@ -40,6 +40,21 @@ class HospitalStore {
     this.hospitals = hospitals;
   }
 
+  sliced(n) {
+    return new HospitalStore(this.hospitals.slice(0, n));
+  }
+
+  filtered(areas) {
+    if (areas.length === 0) {
+      return this;
+    }
+    return new HospitalStore(
+      this.hospitals.filter((h) =>
+        areas.some((area) => h.address.includes(area)),
+      ),
+    );
+  }
+
   sorted(order) {
     const sorted = [...this.hospitals].sort((a, b) => {
       if (a[order] < b[order]) {
@@ -81,6 +96,10 @@ class HospitalStore {
   getBirthRate() {
     return this.hospitals.map((h) => h.birth_ratio);
   }
+
+  countByArea(area) {
+    return this.hospitals.filter((h) => h.address.includes(area)).length;
+  }
 }
 
 class Hospital {
@@ -110,8 +129,8 @@ $(document).ready(function () {
     .then(readyUpdate)
     .then(updateSorter)
     .then(selectInitialGraphData)
-    .then(reloadPerGraph)
-    .then(reloadNumGraph);
+    .then(reloadAllGraph)
+    .then(readyFilter);
 });
 
 // 並び替えボタンの作成
@@ -172,11 +191,17 @@ function readyUpdate() {
   });
 }
 
+function reloadAllGraph() {
+  reloadPerGraph();
+  reloadNumGraph();
+}
+
 // グラフ表示の更新（分娩率）
 function reloadPerGraph() {
-  const store = new HospitalStore(
-    hospitalStore.hospitals.slice(0, GraphSample),
-  ).sorted("birth_ratio");
+  const store = hospitalStore
+    .filtered(getFilteredArea())
+    .sorted("birth_ratio")
+    .sliced(GraphSample);
 
   const hospitalNames = store.getHospitalNamesWithAddress();
 
@@ -237,9 +262,7 @@ function reloadPerGraph() {
 
 // グラフ表示の更新（移植数・妊娠数・生産分娩数）
 function reloadNumGraph() {
-  const store = new HospitalStore(
-    hospitalStore.hospitals.slice(0, GraphSample),
-  );
+  const store = hospitalStore.filtered(getFilteredArea()).sliced(GraphSample);
 
   const hospitalNames = store.getHospitalNamesWithAddress();
 
