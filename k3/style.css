@@ -13,6 +13,11 @@ body {
   background-color: #f8f9f9;
 }
 
+div.description {
+  margin: 0.5em;
+  margin-bottom: 1em;
+}
+
 .graph-description {
   font-size: 80%;
   margin: 1em 0em;
