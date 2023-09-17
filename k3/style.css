@@ -60,7 +60,8 @@ div.description {
 }
 
 #area-selector button {
-  margin-top: 0.5em;
+  margin-top: 1em;
+  margin-right: 1em;
 }
 
 #num-sorter {
