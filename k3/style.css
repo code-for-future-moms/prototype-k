@@ -37,8 +37,7 @@ div.description {
   margin-left: 0.5em;
   padding: 1em;
   width: 60%;
-  float: left;
-  position: fixed;
+  position: absolute;
   background-color: #fbfbfb;
   z-index: 100;
   border: 1px solid #d0d0d0;
@@ -114,6 +113,10 @@ div.contents {
 
   h2 {
     margin: 0 0.5em 0.5em 0.5em;
+  }
+
+  #area-selector {
+    width: 80%;
   }
 
   .graph-description {
