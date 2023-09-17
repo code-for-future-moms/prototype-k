@@ -47,14 +47,21 @@ function readyFilter() {
       return d + "(" + hospitalStore.countByArea(d) + ")";
     });
 
-  container
-    .append("div")
+  const buttonGroup = container.append("div").attr("class", "buttons");
+
+  buttonGroup
     .append("button")
-    .attr("id", "update-button")
     .text("更新")
     .on("click", function (_) {
       reloadFilterLabel();
       reloadAllGraph();
+    });
+
+  buttonGroup
+    .append("button")
+    .text("リセット")
+    .on("click", function (_) {
+      d3.selectAll("input:checked").property("checked", false);
     });
 
   reloadFilterLabel();
