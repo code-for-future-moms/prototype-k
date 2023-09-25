@@ -199,7 +199,7 @@ function reloadDisplay() {
 function reloadTable() {
   let api = $("#data").dataTable().api();
   let filter = getFilteredArea().join("|");
-  if(filter.length > 0) {
+  if (filter.length > 0) {
     api.search("(?:" + filter + ")", true).draw();
   }
 }
