@@ -39,7 +39,8 @@ $(document).ready(function () {
     .then(updateSwitcher)
     .then(updateSorter)
     .then(selectInitialGraphData)
-    .then(reloadCharts);
+    .then(reloadCharts)
+    .then(readyFilter);
 });
 
 // 表示項目ボタンの作成
