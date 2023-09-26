@@ -158,10 +158,10 @@ function readyUpdate() {
   const table = $("#data").DataTable({
     columnDefs: [
       {
-          orderable: true,
-          className: 'select-checkbox',
-          targets: 0
-      }
+        orderable: true,
+        className: "select-checkbox",
+        targets: 0,
+      },
     ],
     dom: "Bfrtip",
     select: {
