@@ -2,6 +2,7 @@ let initialized = false;
 let hospitalStore = null;
 let dataHeaders = [];
 let cachedData = null;
+let currentOrder = null;
 
 $(document).ready(function () {
   d3.text(DataSource).then(d3.tsvParseRows).then(dataStore).then(readyFilter);
@@ -13,7 +14,7 @@ function performAfterFilter() {
   if (initialized) {
     reloadData(cachedData);
     reloadTable();
-    reloadDisplay();
+    performAfterSort(currentOrder);
   } else {
     d3.text(DataSource)
       .then(d3.tsvParseRows)
@@ -27,6 +28,7 @@ function performAfterFilter() {
 }
 
 function performAfterSort(sorter) {
+  currentOrder = sorter;
   hospitalStore = hospitalStore.sorted(sorter);
   reloadDisplay();
 }
