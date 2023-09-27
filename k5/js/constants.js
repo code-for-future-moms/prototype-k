@@ -10,10 +10,12 @@ const PlotSample = 20;
 
 // TSVのヘッダーと日本語名の対応
 const NameMap = {
+  name: "クリニック名",
   et_count: "移植数",
   preg_count: "妊娠数",
   birth_count: "分娩数",
   birth_ratio: "分娩率",
+  address: "住所",
 };
 
 // 並び替え対象
