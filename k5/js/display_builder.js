@@ -56,7 +56,7 @@ function generateTable() {
     .enter()
     .append("th")
     .attr("nowrap", "nowrap")
-    .text((d) => NameMap[d]);
+    .text((d) => NameMap[d] || d);
 
   const rows = tbody
     .selectAll(null)
