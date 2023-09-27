@@ -1,19 +1,12 @@
+let dataTable = null;
+
 function reloadDisplay() {
-  reloadTable();
   reloadGraph();
 }
 
-function reloadTable() {
-  let api = $("#data").dataTable().api();
-  let filter = getFilteredArea().join("|");
-  if (filter.length > 0) {
-    api.search("(?:" + filter + ")", true).draw();
-  }
-}
-
 // データテーブルの作成
-function readyUpdate() {
-  $("#data").DataTable({
+function tableToDataTable() {
+  dataTable = $("#data").DataTable({
     dom: "Bfrtip",
     language: {
       search: "検索:",
@@ -27,21 +20,40 @@ function readyUpdate() {
 }
 
 // TSVをテーブルに変換
-function tabulate(data) {
+function generateTable() {
+  if (dataTable) {
+    dataTable.destroy();
+  }
+
   const table = d3.select("table");
+  table.selectAll("*").remove();
+
   const thead = table.append("thead");
   const tbody = table.append("tbody");
 
   thead
     .append("tr")
     .selectAll(null)
-    .data(data.shift())
+    .data(dataHeaders)
     .enter()
     .append("th")
     .attr("nowrap", "nowrap")
     .text((d) => NameMap[d]);
 
-  const rows = tbody.selectAll(null).data(data).enter().append("tr");
+  const rows = tbody
+    .selectAll(null)
+    .data(
+      hospitalStore.hospitals.map((h) => [
+        h.name,
+        h.et_count,
+        h.preg_count,
+        h.birth_count,
+        h.birth_ratio,
+        h.address,
+      ]),
+    )
+    .enter()
+    .append("tr");
 
   rows
     .selectAll(null)
