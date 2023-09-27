@@ -2,9 +2,6 @@ let dataTable = null;
 
 function reloadDisplay() {
   reloadGraph();
-}
-
-function reloadTable() {
   generateTable();
   tableToDataTable();
 }
@@ -72,7 +69,7 @@ function generateTable() {
 
 // グラフ表示の更新
 function reloadGraph() {
-  const store = hospitalStore.filtered(getFilteredArea()).sliced(GraphSample);
+  const store = hospitalStore.sliced(GraphSample);
 
   const hospitalNames = store.getHospitalNamesWithAddress();
 

@@ -13,13 +13,11 @@ function performAfterFilter() {
 
   if (initialized) {
     reloadData(cachedData);
-    reloadTable();
     performAfterSort(currentOrder);
   } else {
     d3.text(DataSource)
       .then(d3.tsvParseRows)
       .then(reloadData)
-      .then(reloadTable)
       .then(readySortButton)
       .then(selectInitialGraphData);
   }
