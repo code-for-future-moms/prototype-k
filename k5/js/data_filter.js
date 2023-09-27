@@ -54,10 +54,9 @@ function readyFilter() {
     .text("表示")
     .on("click", function (_) {
       reloadFilterLabel();
-      reloadDisplay();
+      performAfterFilter();
 
       d3.select("#area-selector").classed("none", true);
-      performAfterFilter();
     });
 
   buttonGroup

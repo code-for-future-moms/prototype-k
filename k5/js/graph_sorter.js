@@ -1,6 +1,18 @@
 // 状態用グローバル変数
 let activeSorter = null;
 
+// 初期表示の医療機関の選択
+function selectInitialGraphData() {
+  activeSorter = d3
+    .selectAll("button.btn")
+    .filter(function (d) {
+      return d === DefaultSorter;
+    })
+    .classed("btn-outline-secondary", false)
+    .classed("btn-secondary", true);
+  hospitalStore = hospitalStore.sorted(DefaultSorter);
+}
+
 // 並び替えボタンの作成
 function updateSorter() {
   d3.select("#num-sorter")
