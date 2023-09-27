@@ -10,11 +10,11 @@ function selectInitialGraphData() {
     })
     .classed("btn-outline-secondary", false)
     .classed("btn-secondary", true);
-  hospitalStore = hospitalStore.sorted(DefaultSorter);
+  performAfterSort(DefaultSorter);
 }
 
 // 並び替えボタンの作成
-function updateSorter() {
+function readySortButton() {
   d3.select("#num-sorter")
     .append("div")
     .attr("class", "btn-group btn-group-sm")
@@ -38,8 +38,6 @@ function updateSorter() {
         .classed("btn-outline-secondary", false)
         .classed("btn-secondary", true);
 
-      let sorter = this.value;
-      hospitalStore = hospitalStore.sorted(sorter);
-      reloadDisplay();
+      performAfterSort(this.value);
     });
 }

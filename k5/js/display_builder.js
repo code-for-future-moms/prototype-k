@@ -4,6 +4,11 @@ function reloadDisplay() {
   reloadGraph();
 }
 
+function reloadTable() {
+  generateTable();
+  tableToDataTable();
+}
+
 // データテーブルの作成
 function tableToDataTable() {
   dataTable = $("#data").DataTable({

@@ -4,32 +4,31 @@ let dataHeaders = [];
 let cachedData = null;
 
 $(document).ready(function () {
-  d3.text(DataSource)
-    .then(d3.tsvParseRows)
-    .then(dataStore)
-    .then(selectInitialGraphData)
-    .then(readyFilter);
+  d3.text(DataSource).then(d3.tsvParseRows).then(dataStore).then(readyFilter);
 });
 
 function performAfterFilter() {
   d3.selectAll(".contents").classed("none", false);
 
   if (initialized) {
-    updateData(cachedData);
-    generateTable();
-    tableToDataTable();
+    reloadData(cachedData);
+    reloadTable();
     reloadDisplay();
   } else {
     d3.text(DataSource)
       .then(d3.tsvParseRows)
-      .then(updateData)
-      .then(generateTable)
-      .then(tableToDataTable)
-      .then(updateSorter)
-      .then(reloadDisplay);
+      .then(reloadData)
+      .then(reloadTable)
+      .then(readySortButton)
+      .then(selectInitialGraphData);
   }
 
   initialized = true;
+}
+
+function performAfterSort(sorter) {
+  hospitalStore = hospitalStore.sorted(sorter);
+  reloadDisplay();
 }
 
 // TSVをデータに変換
@@ -61,7 +60,7 @@ function dataStore(data) {
 }
 
 // データの絞り込み
-function updateData(data) {
+function reloadData(data) {
   let filter = getFilteredArea();
   let hospitals = [];
   let skipHeader = true;
