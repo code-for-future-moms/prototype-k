@@ -18,6 +18,22 @@ function tableToDataTable() {
     buttons: {
       buttons: ["copy", "csv", "excel"],
     },
+    columnDefs: [
+      { targets: [1, 2, 3, 4], searchable: false },
+      {
+        targets: 5,
+        data: "map_link",
+        render: function (data) {
+          return (
+            '<a href="https://maps.google.com/?hl=ja&q=' +
+            data +
+            '">' +
+            data +
+            "</a>"
+          );
+        },
+      },
+    ],
   });
 }
 
