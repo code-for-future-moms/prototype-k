@@ -51,10 +51,13 @@ function readyFilter() {
 
   buttonGroup
     .append("button")
-    .text("更新")
+    .text("表示")
     .on("click", function (_) {
       reloadFilterLabel();
       reloadDisplay();
+
+      d3.select("#area-selector").classed("none", true);
+      performAfterFilter();
     });
 
   buttonGroup
@@ -80,8 +83,6 @@ function reloadFilterLabel() {
 
   const label = area.length === 0 ? "すべて" : area;
   d3.select("#filtered-label").text("▼ 表示地域：" + label);
-
-  d3.select("#area-selector").classed("none", true);
 }
 
 function getFilteredArea() {
