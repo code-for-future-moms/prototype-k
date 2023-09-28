@@ -3,6 +3,7 @@ let hospitalStore = null;
 let dataHeaders = [];
 let cachedData = null;
 let currentOrder = null;
+let skipSave = false;
 
 $(document).ready(function () {
   let area = loadFilterArea();
@@ -20,8 +21,19 @@ $(document).ready(function () {
   }
 });
 
+$(window).on("popstate", function (event) {
+  if (event.originalEvent.state) {
+    let area = event.originalEvent.state.area;
+    skipSave = true;
+    updateFilter(area.split(","));
+  } else {
+    d3.select("#area-selector").classed("none", false);
+  }
+});
+
 function performAfterFilter() {
-  d3.selectAll(".contents").classed("none", false);
+  if (!skipSave) saveFilterArea();
+  skipSave = false;
 
   if (initialized) {
     reloadData(cachedData);
@@ -39,13 +51,13 @@ function performAfterFilter() {
 
 function saveFilterArea() {
   let area = getFilteredArea().join(",");
-  window.history.pushState(null, null, "?region=" + area);
+  window.history.pushState({ area: area }, null, "?area=" + area);
 }
 
 function loadFilterArea() {
   let urlParams = new URLSearchParams(window.location.search);
-  let region = urlParams.get("region");
-  return region != null ? region.split(",") : null;
+  let area = urlParams.get("area");
+  return area != null ? area.split(",") : null;
 }
 
 function performAfterSort(sorter) {
