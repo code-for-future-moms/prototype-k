@@ -1,8 +1,20 @@
 // 状態用グローバル変数
 let activeSorter = null;
 
+// 初期表示の医療機関の選択
+function selectInitialGraphData() {
+  activeSorter = d3
+    .selectAll("button.btn")
+    .filter(function (d) {
+      return d === DefaultSorter;
+    })
+    .classed("btn-outline-secondary", false)
+    .classed("btn-secondary", true);
+  performAfterSort(DefaultSorter);
+}
+
 // 並び替えボタンの作成
-function updateSorter() {
+function readySortButton() {
   d3.select("#num-sorter")
     .append("div")
     .attr("class", "btn-group btn-group-sm")
@@ -26,8 +38,6 @@ function updateSorter() {
         .classed("btn-outline-secondary", false)
         .classed("btn-secondary", true);
 
-      let sorter = this.value;
-      hospitalStore = hospitalStore.sorted(sorter);
-      reloadDisplay();
+      performAfterSort(this.value);
     });
 }
