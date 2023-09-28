@@ -53,10 +53,7 @@ function readyFilter() {
     .append("button")
     .text("表示")
     .on("click", function (_) {
-      reloadFilterLabel();
-      performAfterFilter();
-
-      d3.select("#area-selector").classed("none", true);
+      performDisplayFilter();
     });
 
   buttonGroup
@@ -73,6 +70,25 @@ function readyFilter() {
       return !d3.select(this).classed("none");
     });
   });
+}
+
+function performDisplayFilter() {
+  reloadFilterLabel();
+  saveFilterArea();
+  performAfterFilter();
+
+  d3.select("#area-selector").classed("none", true);
+}
+
+function updateFilter(area) {
+  d3.selectAll("input").each(function () {
+    let input = d3.select(this);
+    if (area.includes(input.property("value"))) {
+      input.property("checked", true);
+    }
+  });
+
+  performDisplayFilter();
 }
 
 function reloadFilterLabel() {

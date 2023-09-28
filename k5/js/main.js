@@ -5,7 +5,19 @@ let cachedData = null;
 let currentOrder = null;
 
 $(document).ready(function () {
-  d3.text(DataSource).then(d3.tsvParseRows).then(dataStore).then(readyFilter);
+  let area = loadFilterArea();
+
+  if (area) {
+    d3.text(DataSource)
+      .then(d3.tsvParseRows)
+      .then(dataStore)
+      .then(readyFilter)
+      .then(function () {
+        updateFilter(area);
+      });
+  } else {
+    d3.text(DataSource).then(d3.tsvParseRows).then(dataStore).then(readyFilter);
+  }
 });
 
 function performAfterFilter() {
