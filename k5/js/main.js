@@ -66,7 +66,7 @@ function performAfterSort(sorter) {
   reloadDisplay();
 }
 
-// TSVをデータに変換
+// TSVをデータに変換しチェックボックス配置のための空のカラムの追加
 function dataStore(data) {
   cachedData = data;
 
@@ -74,7 +74,7 @@ function dataStore(data) {
 
   data.forEach(function (row) {
     if (dataHeaders.length == 0) {
-      dataHeaders = row;
+      dataHeaders = row.unshift("viz");
       return;
     }
     hospitals.push(
