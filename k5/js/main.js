@@ -25,6 +25,17 @@ function performAfterFilter() {
   initialized = true;
 }
 
+function saveFilterArea() {
+  let area = getFilteredArea().join(",");
+  window.history.pushState(null, null, "?region=" + area);
+}
+
+function loadFilterArea() {
+  let urlParams = new URLSearchParams(window.location.search);
+  let region = urlParams.get("region");
+  return region != null ? region.split(",") : null;
+}
+
 function performAfterSort(sorter) {
   currentOrder = sorter;
   hospitalStore = hospitalStore.sorted(sorter);
