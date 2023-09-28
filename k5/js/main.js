@@ -5,7 +5,19 @@ let cachedData = null;
 let currentOrder = null;
 
 $(document).ready(function () {
-  d3.text(DataSource).then(d3.tsvParseRows).then(dataStore).then(readyFilter);
+  let area = loadFilterArea();
+
+  if (area) {
+    d3.text(DataSource)
+      .then(d3.tsvParseRows)
+      .then(dataStore)
+      .then(readyFilter)
+      .then(function () {
+        updateFilter(area);
+      });
+  } else {
+    d3.text(DataSource).then(d3.tsvParseRows).then(dataStore).then(readyFilter);
+  }
 });
 
 function performAfterFilter() {
@@ -23,6 +35,17 @@ function performAfterFilter() {
   }
 
   initialized = true;
+}
+
+function saveFilterArea() {
+  let area = getFilteredArea().join(",");
+  window.history.pushState(null, null, "?region=" + area);
+}
+
+function loadFilterArea() {
+  let urlParams = new URLSearchParams(window.location.search);
+  let region = urlParams.get("region");
+  return region != null ? region.split(",") : null;
 }
 
 function performAfterSort(sorter) {
