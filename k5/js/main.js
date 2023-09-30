@@ -74,6 +74,7 @@ function dataStore(data) {
 
   data.forEach(function (row) {
     if (dataHeaders.length == 0) {
+      row.unshift("viz");
       dataHeaders = row;
       return;
     }

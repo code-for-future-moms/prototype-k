@@ -10,6 +10,10 @@ function reloadDisplay() {
 function _tableToDataTable() {
   dataTable = $("#data").DataTable({
     dom: "Bfrtip",
+    select: {
+      style: "multi",
+      selector: "td:first-child",
+    },
     language: {
       search: "検索:",
     },
@@ -19,9 +23,10 @@ function _tableToDataTable() {
       buttons: ["copy", "csv", "excel"],
     },
     columnDefs: [
-      { targets: [1, 2, 3, 4], searchable: false },
+      { targets: 0, className: "select-checkbox" },
+      { targets: [2, 3, 4, 5], searchable: false },
       {
-        targets: 5,
+        targets: 6,
         data: "map_link",
         render: function (data) {
           return (
@@ -62,6 +67,7 @@ function _generateTable() {
     .selectAll(null)
     .data(
       hospitalStore.hospitals.map((h) => [
+        "",
         h.name,
         h.et_count,
         h.preg_count,
