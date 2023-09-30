@@ -26,7 +26,7 @@ function readySortButton() {
     .attr("type", "button")
     .attr("class", "btn btn-outline-secondary")
     .attr("value", (key) => key)
-    .text((key) => NameMap[key] + "順")
+    .text((key) => Columns[key].label + "順")
     .on("click", function (_) {
       if (activeSorter) {
         activeSorter

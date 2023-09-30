@@ -1,13 +1,13 @@
 let dataTable = null;
 
 function reloadDisplay() {
-  reloadGraph();
-  generateTable();
-  tableToDataTable();
+  _reloadGraph();
+  _generateTable();
+  _tableToDataTable();
 }
 
 // データテーブルの作成
-function tableToDataTable() {
+function _tableToDataTable() {
   dataTable = $("#data").DataTable({
     dom: "Bfrtip",
     language: {
@@ -38,7 +38,7 @@ function tableToDataTable() {
 }
 
 // TSVをテーブルに変換
-function generateTable() {
+function _generateTable() {
   if (dataTable) {
     dataTable.destroy();
   }
@@ -56,7 +56,7 @@ function generateTable() {
     .enter()
     .append("th")
     .attr("nowrap", "nowrap")
-    .text((d) => NameMap[d] || d);
+    .text((d) => (Columns[d] ? Columns[d].label : d));
 
   const rows = tbody
     .selectAll(null)
@@ -84,30 +84,30 @@ function generateTable() {
 }
 
 // グラフ表示の更新
-function reloadGraph() {
+function _reloadGraph() {
   const store = hospitalStore.sliced(GraphSample);
 
   const hospitalNames = store.getHospitalNamesWithAddress();
 
   let series = [
     {
-      name: NameMap["et_count"],
-      color: ColorMap["et_count"],
+      name: Columns.et_count.label,
+      color: Columns.et_count.color,
       data: store.getEtCount(),
     },
     {
-      name: NameMap["preg_count"],
-      color: ColorMap["preg_count"],
+      name: Columns.preg_count.label,
+      color: Columns.preg_count.color,
       data: store.getPregCount(),
     },
     {
-      name: NameMap["birth_count"],
-      color: ColorMap["birth_count"],
+      name: Columns.birth_count.label,
+      color: Columns.birth_count.color,
       data: store.getBirthCount(),
     },
     {
-      name: NameMap["birth_ratio"],
-      color: ColorMap["birth_ratio"],
+      name: Columns.birth_ratio.label,
+      color: Columns.birth_ratio.color,
       data: store.getBirthRatio(),
       yAxis: 1,
     },
@@ -148,7 +148,7 @@ function reloadGraph() {
       },
       {
         title: {
-          text: NameMap["birth_ratio"] + "(%)",
+          text: Columns.birth_ratio.label + "(%)",
         },
         opposite: true,
         max: 100,
@@ -171,21 +171,20 @@ function generateTooltip(hospital) {
     "<b>" +
     hospital.name +
     "</b><br />" +
-    ["et_count", "preg_count", "birth_count", "birth_ratio"]
-      .map(function (key) {
-        return (
-          '&nbsp;<span style="color:' +
-          ColorMap[key] +
-          '">\u25CF</span> ' +
-          NameMap[key] +
-          ": <b>" +
-          (NameMap[key].includes("率")
-            ? hospital[key] + "%"
-            : comma(hospital[key])) +
-          "</b><br />"
-        );
-      })
-      .join("") +
+    GraphTooltip.map(function (key) {
+      const column = Columns[key];
+      return (
+        '&nbsp;<span style="color:' +
+        column.color +
+        '">\u25CF</span> ' +
+        column.label +
+        ": <b>" +
+        (column.label.includes("率")
+          ? hospital[key] + "%"
+          : comma(hospital[key])) +
+        "</b><br />"
+      );
+    }).join("") +
     "<span style='font-size:0.9em'>\uD83D\uDCCD " +
     hospital.address +
     "</span>"

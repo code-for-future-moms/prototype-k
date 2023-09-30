@@ -53,7 +53,7 @@ function readyFilter() {
     .append("button")
     .text("表示")
     .on("click", function (_) {
-      performDisplayFilter();
+      _performDisplayFilter();
     });
 
   buttonGroup
@@ -63,20 +63,13 @@ function readyFilter() {
       d3.selectAll("input:checked").property("checked", false);
     });
 
-  reloadFilterLabel();
+  _reloadFilterLabel();
 
   d3.select("#filtered-label").on("click", function (_) {
     d3.select("#area-selector").classed("none", function (_) {
       return !d3.select(this).classed("none");
     });
   });
-}
-
-function performDisplayFilter() {
-  reloadFilterLabel();
-  performAfterFilter();
-
-  d3.select("#area-selector").classed("none", true);
 }
 
 function updateFilter(area) {
@@ -90,16 +83,7 @@ function updateFilter(area) {
     });
   }
 
-  performDisplayFilter();
-}
-
-function reloadFilterLabel() {
-  const area = getFilteredArea()
-    .map((d) => d)
-    .join(", ");
-
-  const label = area.length === 0 ? "すべて" : area;
-  d3.select("#filtered-label").text("▼ 表示地域：" + label);
+  _performDisplayFilter();
 }
 
 function getFilteredArea() {
@@ -108,4 +92,20 @@ function getFilteredArea() {
     .selectAll("input:checked")
     .data()
     .map((d) => d);
+}
+
+function _performDisplayFilter() {
+  _reloadFilterLabel();
+  performAfterFilter();
+
+  d3.select("#area-selector").classed("none", true);
+}
+
+function _reloadFilterLabel() {
+  const area = getFilteredArea()
+    .map((d) => d)
+    .join(", ");
+
+  const label = area.length === 0 ? "すべて" : area;
+  d3.select("#filtered-label").text("▼ 表示地域：" + label);
 }
