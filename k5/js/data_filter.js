@@ -53,7 +53,7 @@ function readyFilter() {
     .append("button")
     .text("表示")
     .on("click", function (_) {
-      performDisplayFilter();
+      _performDisplayFilter();
     });
 
   buttonGroup
@@ -63,7 +63,7 @@ function readyFilter() {
       d3.selectAll("input:checked").property("checked", false);
     });
 
-  reloadFilterLabel();
+  _reloadFilterLabel();
 
   d3.select("#filtered-label").on("click", function (_) {
     d3.select("#area-selector").classed("none", function (_) {
@@ -72,8 +72,8 @@ function readyFilter() {
   });
 }
 
-function performDisplayFilter() {
-  reloadFilterLabel();
+function _performDisplayFilter() {
+  _reloadFilterLabel();
   performAfterFilter();
 
   d3.select("#area-selector").classed("none", true);
@@ -90,10 +90,10 @@ function updateFilter(area) {
     });
   }
 
-  performDisplayFilter();
+  _performDisplayFilter();
 }
 
-function reloadFilterLabel() {
+function _reloadFilterLabel() {
   const area = getFilteredArea()
     .map((d) => d)
     .join(", ");

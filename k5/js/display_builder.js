@@ -1,13 +1,13 @@
 let dataTable = null;
 
 function reloadDisplay() {
-  reloadGraph();
-  generateTable();
-  tableToDataTable();
+  _reloadGraph();
+  _generateTable();
+  _tableToDataTable();
 }
 
 // データテーブルの作成
-function tableToDataTable() {
+function _tableToDataTable() {
   dataTable = $("#data").DataTable({
     dom: "Bfrtip",
     language: {
@@ -38,7 +38,7 @@ function tableToDataTable() {
 }
 
 // TSVをテーブルに変換
-function generateTable() {
+function _generateTable() {
   if (dataTable) {
     dataTable.destroy();
   }
@@ -84,7 +84,7 @@ function generateTable() {
 }
 
 // グラフ表示の更新
-function reloadGraph() {
+function _reloadGraph() {
   const store = hospitalStore.sliced(GraphSample);
 
   const hospitalNames = store.getHospitalNamesWithAddress();
