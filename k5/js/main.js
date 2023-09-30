@@ -38,12 +38,14 @@ function performAfterFilter() {
   if (initialized) {
     reloadData(cachedData);
     performAfterSort(currentOrder);
+    reloadTable();
   } else {
     d3.text(DataSource)
       .then(d3.tsvParseRows)
       .then(reloadData)
       .then(readySortButton)
-      .then(selectInitialGraphData);
+      .then(selectInitialGraphData)
+      .then(reloadTable);
   }
 
   initialized = true;
@@ -63,7 +65,7 @@ function loadFilterArea() {
 function performAfterSort(sorter) {
   currentOrder = sorter;
   hospitalStore = hospitalStore.sorted(sorter);
-  reloadDisplay();
+  reloadGraph();
 }
 
 // TSVをデータに変換

@@ -1,14 +1,14 @@
 let dataTable = null;
+let _tableElement = "#data";
 
-function reloadDisplay() {
-  _reloadGraph();
+function reloadTable() {
   _generateTable();
   _tableToDataTable();
 }
 
 // データテーブルの作成
 function _tableToDataTable() {
-  dataTable = $("#data").DataTable({
+  dataTable = $(_tableElement).DataTable({
     dom: "Bfrtip",
     select: {
       style: "multi",
@@ -19,9 +19,21 @@ function _tableToDataTable() {
     },
     info: false,
     pageLength: PlotSample,
-    buttons: {
-      buttons: ["copy", "csv", "excel"],
-    },
+    buttons: [
+      {
+        text: "グラフ更新",
+        action: function () {
+          reloadGraph();
+        },
+      },
+      {
+        text: "選択解除",
+        action: function () {
+          dataTable.rows({ selected: true }).deselect();
+          reloadGraph();
+        },
+      },
+    ],
     columnDefs: [
       { targets: 0, className: "select-checkbox" },
       { targets: [2, 3, 4, 5], searchable: false },
@@ -89,9 +101,23 @@ function _generateTable() {
   return table;
 }
 
+function _getSelectedHospitalNames() {
+  if (!dataTable) return [];
+  let names = [];
+  let api = $(_tableElement).dataTable().api();
+  let rows = api.rows({ selected: true }).data().toArray();
+
+  rows.forEach(function (row) {
+    names.push(row[1]);
+  });
+  return names;
+}
+
 // グラフ表示の更新
-function _reloadGraph() {
-  const store = hospitalStore.sliced(GraphSample);
+function reloadGraph() {
+  const store = hospitalStore
+    .filteredByName(_getSelectedHospitalNames())
+    .sliced(GraphSample);
 
   const hospitalNames = store.getHospitalNamesWithAddress();
 
