@@ -55,7 +55,6 @@ function _generateTable() {
     .data(dataHeaders)
     .enter()
     .append("th")
-    .attr("nowrap", "nowrap")
     .text((d) => (Columns[d] ? Columns[d].label : d));
 
   const rows = tbody
