@@ -52,6 +52,8 @@ function _tableToDataTable() {
       },
     ],
   });
+
+  dataTable.rows().select();
 }
 
 // TSVをテーブルに変換

@@ -37,8 +37,8 @@ function performAfterFilter() {
 
   if (initialized) {
     reloadData(cachedData);
-    performAfterSort(currentOrder);
     reloadTable();
+    performAfterSort(currentOrder);
   } else {
     d3.text(DataSource)
       .then(d3.tsvParseRows)
