@@ -11,6 +11,9 @@ const PlotSample = 20;
 // 並び替え対象
 const NumSorter = ["et_count", "preg_count", "birth_count", "birth_ratio"];
 
+// グラフのツールチップに表示する項目
+const GraphTooltip = ["et_count", "preg_count", "birth_count", "birth_ratio"];
+
 // デフォルトの並び順
 const DefaultSorter = "et_count";
 

@@ -171,22 +171,20 @@ function generateTooltip(hospital) {
     "<b>" +
     hospital.name +
     "</b><br />" +
-    ["et_count", "preg_count", "birth_count", "birth_ratio"]
-      .map(function (key) {
-        const column = Columns[key];
-        return (
-          '&nbsp;<span style="color:' +
-          column.color +
-          '">\u25CF</span> ' +
-          column.label +
-          ": <b>" +
-          (column.label.includes("率")
-            ? hospital[key] + "%"
-            : comma(hospital[key])) +
-          "</b><br />"
-        );
-      })
-      .join("") +
+    GraphTooltip.map(function (key) {
+      const column = Columns[key];
+      return (
+        '&nbsp;<span style="color:' +
+        column.color +
+        '">\u25CF</span> ' +
+        column.label +
+        ": <b>" +
+        (column.label.includes("率")
+          ? hospital[key] + "%"
+          : comma(hospital[key])) +
+        "</b><br />"
+      );
+    }).join("") +
     "<span style='font-size:0.9em'>\uD83D\uDCCD " +
     hospital.address +
     "</span>"
