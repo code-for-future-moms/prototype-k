@@ -72,13 +72,6 @@ function readyFilter() {
   });
 }
 
-function _performDisplayFilter() {
-  _reloadFilterLabel();
-  performAfterFilter();
-
-  d3.select("#area-selector").classed("none", true);
-}
-
 function updateFilter(area) {
   d3.selectAll("input:checked").property("checked", false);
   if (area.length > 0) {
@@ -93,6 +86,21 @@ function updateFilter(area) {
   _performDisplayFilter();
 }
 
+function getFilteredArea() {
+  return d3
+    .select("#area-selector")
+    .selectAll("input:checked")
+    .data()
+    .map((d) => d);
+}
+
+function _performDisplayFilter() {
+  _reloadFilterLabel();
+  performAfterFilter();
+
+  d3.select("#area-selector").classed("none", true);
+}
+
 function _reloadFilterLabel() {
   const area = getFilteredArea()
     .map((d) => d)
@@ -100,12 +108,4 @@ function _reloadFilterLabel() {
 
   const label = area.length === 0 ? "すべて" : area;
   d3.select("#filtered-label").text("▼ 表示地域：" + label);
-}
-
-function getFilteredArea() {
-  return d3
-    .select("#area-selector")
-    .selectAll("input:checked")
-    .data()
-    .map((d) => d);
 }
