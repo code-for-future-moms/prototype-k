@@ -23,3 +23,16 @@ jobs:
         with:
           commit_message: 'chore: apply prettier change'
           file_pattern: '*.js */*.js */*/*.js *.css */*.css'
+      # https://github.com/stefanzweifel/git-auto-commit-action/discussions/245#discussioncomment-3807922
+      - name: Send the OK back to github
+        run: |
+          curl --request POST \
+          --url https://api.github.com/repos/${{ github.repository }}/statuses/`git rev-parse HEAD` \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "context": "lint",
+            "state": "success",
+            "description": "Prettier passed",
+            "target_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }'
