@@ -49,8 +49,8 @@ function performAfterFilter() {
       .then(d3.tsvParseRows)
       .then(reloadData)
       .then(readySortButton)
-      .then(selectInitialGraphData)
-      .then(reloadTableWithFilter);
+      .then(reloadTableWithFilter)
+      .then(selectInitialGraphData);
   }
 
   initialized = true;
@@ -121,6 +121,10 @@ function reloadData(data) {
   let filter = getFilteredArea();
   let hospitals = [];
   let skipHeader = true;
+
+  if (ShowAllDataInTable) {
+    filter = [];
+  }
 
   data.forEach(function (row) {
     if (skipHeader) {

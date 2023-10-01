@@ -18,6 +18,7 @@ function selectTableFilteredArea() {
       if (result) this.select();
       else this.deselect();
     });
+    dataTable.order([0, "desc"]).draw();
   } else {
     dataTable.rows().select();
   }
@@ -52,7 +53,17 @@ function _tableToDataTable() {
       },
     ],
     columnDefs: [
-      { targets: 0, className: "select-checkbox" },
+      {
+        targets: 0,
+        className: "select-checkbox",
+        orderable: true,
+        render: function (data, type, row, meta) {
+          if (type === "sort") {
+            return row.selected == 1 ? "1" : "0";
+          }
+          return data;
+        },
+      },
       { targets: [2, 3, 4, 5], searchable: false },
       {
         targets: 6,
@@ -68,6 +79,22 @@ function _tableToDataTable() {
         },
       },
     ],
+  });
+
+  dataTable.on("select", function (e, dt, type, indexes) {
+    dataTable.rows(indexes).every(function (rowIdx, tableLoop, rowLoop) {
+      const data = this.data();
+      data.selected = 1;
+      this.data(data);
+    });
+  });
+
+  dataTable.on("deselect", function (e, dt, type, indexes) {
+    dataTable.rows(indexes).every(function (rowIdx, tableLoop, rowLoop) {
+      const data = this.data();
+      data.selected = 0;
+      this.data(data);
+    });
   });
 }
 
