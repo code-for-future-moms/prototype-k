@@ -2,6 +2,9 @@
 const DataSource =
   "https://raw.githubusercontent.com/code-for-future-moms/fetch-open-data/main/data/hospital-data-address-R40620.tsv";
 
+// テーブルにはデータ全件を表示する
+const ShowAllDataInTable = true;
+
 // グラフの表示最大件数
 const GraphSample = 100;
 

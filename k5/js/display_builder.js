@@ -4,6 +4,23 @@ let _tableElement = "#data";
 function reloadTable() {
   _generateTable();
   _tableToDataTable();
+  selectTableFilteredArea();
+}
+
+// 選択
+function selectTableFilteredArea() {
+  if (ShowAllDataInTable) {
+    const filter = getFilteredArea();
+
+    dataTable.rows().every(function (_, _, rowLoop) {
+      const address = this.column(6).data()[rowLoop];
+      const result = filter.some((area) => address.includes(area));
+      if (result) this.select();
+      else this.deselect();
+    });
+  } else {
+    dataTable.rows().select();
+  }
 }
 
 // データテーブルの作成
@@ -52,8 +69,6 @@ function _tableToDataTable() {
       },
     ],
   });
-
-  dataTable.rows().select();
 }
 
 // TSVをテーブルに変換
