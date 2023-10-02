@@ -9,19 +9,15 @@ function reloadTable() {
 
 // 選択
 function selectTableFilteredArea() {
-  if (ShowAllDataInTable) {
-    const filter = getFilteredArea();
+  const filter = getFilteredArea();
 
-    dataTable.rows().every(function (_, _, rowLoop) {
-      const address = this.column(6).data()[rowLoop];
-      const result = filter.some((area) => address.includes(area));
-      if (result) this.select();
-      else this.deselect();
-    });
-    dataTable.order([0, "desc"]).draw();
-  } else {
-    dataTable.rows().select();
-  }
+  dataTable.rows().every(function (_, _, rowLoop) {
+    const address = this.column(6).data()[rowLoop];
+    const result = filter.some((area) => address.includes(area));
+    if (result) this.select();
+    else this.deselect();
+  });
+  dataTable.order([0, "desc"]).draw();
 }
 
 // データテーブルの作成
