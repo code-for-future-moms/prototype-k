@@ -13,11 +13,16 @@ $(document).ready(function () {
       .then(d3.tsvParseRows)
       .then(dataStore)
       .then(readyFilter)
+      .then(reloadTable)
       .then(function () {
         updateFilter(area);
       });
   } else {
-    d3.text(DataSource).then(d3.tsvParseRows).then(dataStore).then(readyFilter);
+    d3.text(DataSource)
+      .then(d3.tsvParseRows)
+      .then(dataStore)
+      .then(readyFilter)
+      .then(reloadTable);
   }
 });
 
@@ -36,13 +41,13 @@ function performAfterFilter() {
   skipSave = false;
 
   if (initialized) {
-    reloadData(cachedData);
+    selectTableFilteredArea();
     performAfterSort(currentOrder);
   } else {
     d3.text(DataSource)
       .then(d3.tsvParseRows)
-      .then(reloadData)
       .then(readySortButton)
+      .then(selectTableFilteredArea)
       .then(selectInitialGraphData);
   }
 
@@ -63,7 +68,7 @@ function loadFilterArea() {
 function performAfterSort(sorter) {
   currentOrder = sorter;
   hospitalStore = hospitalStore.sorted(sorter);
-  reloadDisplay();
+  reloadGraph();
 }
 
 // TSVをデータに変換
@@ -74,6 +79,7 @@ function dataStore(data) {
 
   data.forEach(function (row) {
     if (dataHeaders.length == 0) {
+      row.unshift("viz");
       dataHeaders = row;
       return;
     }
@@ -92,35 +98,4 @@ function dataStore(data) {
   hospitalStore = new HospitalStore(hospitals);
 
   return data;
-}
-
-// データの絞り込み
-function reloadData(data) {
-  let filter = getFilteredArea();
-  let hospitals = [];
-  let skipHeader = true;
-
-  data.forEach(function (row) {
-    if (skipHeader) {
-      skipHeader = false;
-      return;
-    }
-    let hospital = new Hospital(
-      row[0],
-      parseInt(row[1]),
-      parseInt(row[2]),
-      parseInt(row[3]),
-      parseFloat(row[4]),
-      row[5],
-    );
-
-    if (
-      filter.length == 0 ||
-      filter.some((area) => hospital.address.includes(area))
-    ) {
-      hospitals.push(hospital);
-    }
-  });
-
-  hospitalStore = new HospitalStore(hospitals);
 }

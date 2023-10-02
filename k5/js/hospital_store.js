@@ -18,6 +18,15 @@ class HospitalStore {
     );
   }
 
+  filteredByName(names) {
+    if (names.length === 0) {
+      return this;
+    }
+    return new HospitalStore(
+      this.hospitals.filter((h) => names.includes(h.name)),
+    );
+  }
+
   sorted(order) {
     const sorted = [...this.hospitals].sort((a, b) => {
       if (a[order] < b[order]) {

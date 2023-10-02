@@ -19,6 +19,10 @@ const DefaultSorter = "et_count";
 
 // TSVデータとラベルのマッピング
 const Columns = {
+  viz: {
+    label: "グラフ表示",
+  },
+
   name: {
     label: "クリニック名",
   },

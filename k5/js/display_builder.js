@@ -1,27 +1,68 @@
 let dataTable = null;
+let _tableElement = "#data";
 
-function reloadDisplay() {
-  _reloadGraph();
+function reloadTable() {
   _generateTable();
   _tableToDataTable();
+  selectTableFilteredArea();
+}
+
+// 選択
+function selectTableFilteredArea() {
+  const filter = getFilteredArea();
+
+  dataTable.rows().every(function (_, _, rowLoop) {
+    const address = this.column(6).data()[rowLoop];
+    const result = filter.some((area) => address.includes(area));
+    if (result) this.select();
+    else this.deselect();
+  });
+  dataTable.order([0, "desc"]).draw();
 }
 
 // データテーブルの作成
 function _tableToDataTable() {
-  dataTable = $("#data").DataTable({
+  dataTable = $(_tableElement).DataTable({
     dom: "Bfrtip",
+    select: {
+      style: "multi",
+      selector: "td:first-child",
+    },
     language: {
       search: "検索:",
     },
     info: false,
     pageLength: PlotSample,
-    buttons: {
-      buttons: ["copy", "csv", "excel"],
-    },
-    columnDefs: [
-      { targets: [1, 2, 3, 4], searchable: false },
+    buttons: [
       {
-        targets: 5,
+        text: "グラフ更新",
+        action: function () {
+          reloadGraph();
+        },
+      },
+      {
+        text: "選択解除",
+        action: function () {
+          dataTable.rows({ selected: true }).deselect();
+          reloadGraph();
+        },
+      },
+    ],
+    columnDefs: [
+      {
+        targets: 0,
+        className: "select-checkbox",
+        orderable: true,
+        render: function (data, type, row, meta) {
+          if (type === "sort") {
+            return row.selected == 1 ? "1" : "0";
+          }
+          return data;
+        },
+      },
+      { targets: [2, 3, 4, 5], searchable: false },
+      {
+        targets: 6,
         data: "map_link",
         render: function (data) {
           return (
@@ -34,6 +75,22 @@ function _tableToDataTable() {
         },
       },
     ],
+  });
+
+  dataTable.on("select", function (e, dt, type, indexes) {
+    dataTable.rows(indexes).every(function (rowIdx, tableLoop, rowLoop) {
+      const data = this.data();
+      data.selected = 1;
+      this.data(data);
+    });
+  });
+
+  dataTable.on("deselect", function (e, dt, type, indexes) {
+    dataTable.rows(indexes).every(function (rowIdx, tableLoop, rowLoop) {
+      const data = this.data();
+      data.selected = 0;
+      this.data(data);
+    });
   });
 }
 
@@ -61,6 +118,7 @@ function _generateTable() {
     .selectAll(null)
     .data(
       hospitalStore.hospitals.map((h) => [
+        "",
         h.name,
         h.et_count,
         h.preg_count,
@@ -82,9 +140,23 @@ function _generateTable() {
   return table;
 }
 
+function _getSelectedHospitalNames() {
+  if (!dataTable) return [];
+  let names = [];
+  let api = $(_tableElement).dataTable().api();
+  let rows = api.rows({ selected: true }).data().toArray();
+
+  rows.forEach(function (row) {
+    names.push(row[1]);
+  });
+  return names;
+}
+
 // グラフ表示の更新
-function _reloadGraph() {
-  const store = hospitalStore.sliced(GraphSample);
+function reloadGraph() {
+  const store = hospitalStore
+    .filteredByName(_getSelectedHospitalNames())
+    .sliced(GraphSample);
 
   const hospitalNames = store.getHospitalNamesWithAddress();
 
