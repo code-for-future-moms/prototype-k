@@ -13,7 +13,6 @@ $(document).ready(function () {
       .then(d3.tsvParseRows)
       .then(dataStore)
       .then(readyFilter)
-      .then(reloadTable)
       .then(function () {
         updateFilter(area);
       });
@@ -21,8 +20,7 @@ $(document).ready(function () {
     d3.text(DataSource)
       .then(d3.tsvParseRows)
       .then(dataStore)
-      .then(readyFilter)
-      .then(reloadTable);
+      .then(readyFilter);
   }
 });
 
@@ -46,6 +44,7 @@ function performAfterFilter() {
   } else {
     d3.text(DataSource)
       .then(d3.tsvParseRows)
+      .then(reloadTable)
       .then(readySortButton)
       .then(selectTableFilteredArea)
       .then(selectInitialGraphData);
