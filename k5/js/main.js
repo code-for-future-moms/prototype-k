@@ -17,10 +17,7 @@ $(document).ready(function () {
         updateFilter(area);
       });
   } else {
-    d3.text(DataSource)
-      .then(d3.tsvParseRows)
-      .then(dataStore)
-      .then(readyFilter);
+    d3.text(DataSource).then(d3.tsvParseRows).then(dataStore).then(readyFilter);
   }
 });
 
