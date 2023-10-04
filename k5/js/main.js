@@ -13,16 +13,11 @@ $(document).ready(function () {
       .then(d3.tsvParseRows)
       .then(dataStore)
       .then(readyFilter)
-      .then(reloadTable)
       .then(function () {
         updateFilter(area);
       });
   } else {
-    d3.text(DataSource)
-      .then(d3.tsvParseRows)
-      .then(dataStore)
-      .then(readyFilter)
-      .then(reloadTable);
+    d3.text(DataSource).then(d3.tsvParseRows).then(dataStore).then(readyFilter);
   }
 });
 
@@ -46,6 +41,7 @@ function performAfterFilter() {
   } else {
     d3.text(DataSource)
       .then(d3.tsvParseRows)
+      .then(reloadTable)
       .then(readySortButton)
       .then(selectTableFilteredArea)
       .then(selectInitialGraphData);
