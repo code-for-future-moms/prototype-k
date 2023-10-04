@@ -35,6 +35,8 @@ function performAfterFilter() {
   if (!skipSave) saveFilterArea();
   skipSave = false;
 
+  d3.select("body").classed("landing", false);
+
   if (initialized) {
     selectTableFilteredArea();
     performAfterSort(currentOrder);
