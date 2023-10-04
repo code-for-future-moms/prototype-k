@@ -44,7 +44,6 @@ function _tableToDataTable() {
         text: "選択解除",
         action: function () {
           dataTable.rows({ selected: true }).deselect();
-          reloadGraph();
         },
       },
     ],
