@@ -59,7 +59,7 @@ function readyFilter() {
 
   buttonGroup
     .append("button")
-    .text("リセット")
+    .text("選択解除")
     .on("click", function (_) {
       d3.selectAll("input:checked").property("checked", false);
     });
