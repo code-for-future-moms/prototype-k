@@ -39,7 +39,7 @@ function readyFilter() {
     .attr("type", "checkbox")
     .attr("id", (_, i) => "checkbox-" + i)
     .attr("value", (d) => d)
-    .property('checked', true);
+    .property("checked", true);
 
   groups
     .append("label")
