@@ -29,7 +29,7 @@ function _tableToDataTable() {
       selector: "td:first-child",
     },
     language: {
-      search: "検索:",
+      search: "クリニック名や住所：",
     },
     info: false,
     pageLength: PlotSample,
