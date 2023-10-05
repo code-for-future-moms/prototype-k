@@ -59,7 +59,7 @@ function readyFilter() {
 
   buttonGroup
     .append("button")
-    .text("リセット")
+    .text("選択解除")
     .on("click", function (_) {
       d3.selectAll("input:checked").property("checked", false);
     });
@@ -103,10 +103,9 @@ function _performDisplayFilter() {
 }
 
 function _reloadFilterLabel() {
-  const area = getFilteredArea()
-    .map((d) => d)
-    .join(", ");
-
-  const label = area.length === 0 ? "すべて" : area;
+  const areas = getFilteredArea();
+  const label = [0, AREAS.length].includes(areas.length)
+    ? "すべて"
+    : areas.join(", ");
   d3.select("#filtered-label").text("▼ 表示地域：" + label);
 }
