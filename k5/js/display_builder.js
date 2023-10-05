@@ -29,7 +29,7 @@ function _tableToDataTable() {
       selector: "td:first-child",
     },
     language: {
-      search: "クリニックの名前や住所の一部で検索しクリニックごとに<br>グラフ表示の有無を設定可能☞",
+      search: "クリニック名や住所：",
     },
     info: false,
     pageLength: PlotSample,
