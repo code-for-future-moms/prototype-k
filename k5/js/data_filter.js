@@ -1,3 +1,5 @@
+const LABEL_ALL = "すべて";
+
 // データから取得できるようにしたい
 const AREAS = [
   "千代田区",
@@ -32,7 +34,32 @@ const AREAS = [
 function readyFilter() {
   const container = d3.select("#area-selector");
 
-  const groups = container.selectAll("span").data(AREAS).enter().append("span");
+  const all = container
+    .selectAll("div")
+    .data([LABEL_ALL])
+    .enter()
+    .append("div");
+
+  all
+    .append("input")
+    .attr("type", "checkbox")
+    .attr("id", (_, i) => "all-checkbox-" + i)
+    .attr("value", (d) => d)
+    .property("checked", true)
+    .on("change", function (_) {
+      d3.select("#area-selector div.areas")
+        .selectAll("input")
+        .property("checked", this.checked);
+    });
+
+  all
+    .append("label")
+    .attr("for", (_, i) => "all-checkbox-" + i)
+    .text((d) => d);
+
+  const areas = container.append("div").attr("class", "areas");
+
+  const groups = areas.selectAll("span").data(AREAS).enter().append("span");
 
   groups
     .append("input")
@@ -52,16 +79,9 @@ function readyFilter() {
 
   buttonGroup
     .append("button")
-    .text("表示")
+    .text("グラフを表示")
     .on("click", function (_) {
       _performDisplayFilter();
-    });
-
-  buttonGroup
-    .append("button")
-    .text("選択解除")
-    .on("click", function (_) {
-      d3.selectAll("input:checked").property("checked", false);
     });
 
   _reloadFilterLabel();
@@ -89,7 +109,7 @@ function updateFilter(area) {
 
 function getFilteredArea() {
   return d3
-    .select("#area-selector")
+    .select("#area-selector div.areas")
     .selectAll("input:checked")
     .data()
     .map((d) => d);
@@ -105,7 +125,7 @@ function _performDisplayFilter() {
 function _reloadFilterLabel() {
   const areas = getFilteredArea();
   const label = [0, AREAS.length].includes(areas.length)
-    ? "すべて"
+    ? LABEL_ALL
     : areas.join(", ");
   d3.select("#filtered-label").text("▼ 表示地域：" + label);
 }
