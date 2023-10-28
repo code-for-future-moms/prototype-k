@@ -82,10 +82,16 @@ class Hospital {
     this.birth_count = birth_count;
     this.birth_ratio = birth_ratio;
     this.address = address;
+
+    this.prefecture = this.address.replace(/^(.+?[都道府県]).*/g, "$1");
+    this.city = this.address.replace(
+      /^(.+?[都道府県])?(.+?[市区町村]).*/g,
+      "$2",
+    );
   }
 
   shortAddress() {
-    return this.address.replace(/^(.+?[都道府県])?(.+?[市区町村]).*/g, "$1$2");
+    return this.prefecture + this.city;
   }
 
   graphName() {

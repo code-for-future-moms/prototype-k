@@ -1,37 +1,14 @@
 const LABEL_ALL = "すべて";
 
-// データから取得できるようにしたい
-const AREAS = [
-  "千代田区",
-  "中央区",
-  "港区",
-  "新宿区",
-  "文京区",
-  "台東区",
-  "墨田区",
-  "江東区",
-  "品川区",
-  "目黒区",
-  "大田区",
-  "世田谷区",
-  "渋谷区",
-  "杉並区",
-  "豊島区",
-  "北区",
-  "板橋区",
-  "練馬区",
-  "足立区",
-  "立川市",
-  "武蔵野市",
-  "三鷹市",
-  "府中市",
-  "調布市",
-  "町田市",
-  "国分寺市",
-  "多摩市",
-];
+let _cities = new Set();
 
 function readyFilter() {
+  _cities = new Set();
+
+  hospitalStore.hospitals.forEach((h) => {
+    _cities.add(h.city);
+  });
+
   const container = d3.select("#area-selector");
 
   const all = container
@@ -59,7 +36,11 @@ function readyFilter() {
 
   const areas = container.append("div").attr("class", "areas");
 
-  const groups = areas.selectAll("span").data(AREAS).enter().append("span");
+  const groups = container
+    .selectAll("span")
+    .data(_cities)
+    .enter()
+    .append("span");
 
   groups
     .append("input")
@@ -124,7 +105,7 @@ function _performDisplayFilter() {
 
 function _reloadFilterLabel() {
   const areas = getFilteredArea();
-  const label = [0, AREAS.length].includes(areas.length)
+  const label = [0, _cities.length].includes(areas.length)
     ? LABEL_ALL
     : areas.join(", ");
   d3.select("#filtered-label").text("▼ 表示地域：" + label);
