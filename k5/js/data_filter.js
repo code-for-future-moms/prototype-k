@@ -34,11 +34,9 @@ function readyFilter() {
     .attr("for", (_, i) => "all-checkbox-" + i)
     .text((d) => d);
 
-  const groups = container
-    .selectAll("span")
-    .data(_cities)
-    .enter()
-    .append("span");
+  const areas = container.append("div").attr("class", "areas");
+
+  const groups = areas.selectAll("span").data(_cities).enter().append("span");
 
   groups
     .append("input")
