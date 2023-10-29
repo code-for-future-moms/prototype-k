@@ -15,7 +15,8 @@ function readyFilter() {
     .selectAll("div")
     .data([LABEL_ALL])
     .enter()
-    .append("div");
+    .append("div")
+    .append("span");
 
   all
     .append("input")
