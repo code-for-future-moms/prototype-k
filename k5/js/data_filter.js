@@ -101,7 +101,7 @@ function _performDisplayFilter() {
 
 function _reloadFilterLabel() {
   const areas = getFilteredArea();
-  const label = [0, _cities.length].includes(areas.length)
+  const label = [0, _cities.size].includes(areas.length)
     ? LABEL_ALL
     : areas.join(", ");
   d3.select("#filtered-label").text("▼ 表示地域：" + label);
