@@ -44,7 +44,15 @@ function readyFilter() {
     .attr("type", "checkbox")
     .attr("id", (_, i) => "checkbox-" + i)
     .attr("value", (d) => d)
-    .property("checked", true);
+    .property("checked", true)
+    .on("change", function (_) {
+      const checkedAreas = d3
+        .select("#area-selector div.areas")
+        .selectAll("input:checked")
+        .size();
+      const result = checkedAreas === _cities.size;
+      d3.select("#area-selector #all-checkbox-0").property("checked", result);
+    });
 
   groups
     .append("label")
