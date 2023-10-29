@@ -33,6 +33,10 @@ div.description {
   margin: 0 1em;
 }
 
+#area-filter {
+  position: relative;
+}
+
 #area-selector {
   margin-left: 0.5em;
   padding: 1em;
