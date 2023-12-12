@@ -12,7 +12,9 @@ class HospitalStore {
       return this;
     }
     return new HospitalStore(
-      this.hospitals.filter((h) => h.name.includes(text) || h.address.includes(text)),
+      this.hospitals.filter(
+        (h) => h.name.includes(text) || h.address.includes(text),
+      ),
     );
   }
 }
