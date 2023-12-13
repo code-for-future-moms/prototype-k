@@ -1,0 +1,42 @@
+.card {
+  border: 1px solid #666;
+  padding-bottom: 1em;
+  margin: 1em;
+  max-width: 700px;
+}
+
+.card .meta {
+  margin: 1em;
+}
+
+.card .information {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.card .flags,
+.card .data {
+  max-width: 300px;
+  margin: 0 1em;
+  padding: 1em;
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  background-color: #cccccc;
+}
+
+.prefecture {
+}
+
+.title {
+  color: #333333;
+  margin: 0.5em 0;
+}
+
+.address {
+}
+
+.url {
+}
+
+.phone {
+}
