@@ -37,6 +37,7 @@ class Hospital {
     frozen_preg,
     frozen_birth,
     frozen_rate,
+    url,
   ) {
     // 病院名
     this.name = name;
@@ -70,5 +71,7 @@ class Hospital {
     this.frozen_birth = frozen_birth;
     // 移植あたり生産率（%）
     this.frozen_rate = frozen_rate;
+    // URL
+    this.url = url;
   }
 }
