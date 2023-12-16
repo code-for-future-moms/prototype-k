@@ -10,13 +10,31 @@ $(document).ready(function () {
 });
 
 function initializePage() {
-  const button = d3.select("#search-button");
-  button.on("click", function (_) {
-    search($("#search-text").val().split(" "));
+  d3.select("#address-search-button").on("click", function (_) {
+    addressSearch($("#address-search-text").val());
+  });
+
+  d3.select("#name-search-button").on("click", function (_) {
+    nameSearch($("#name-search-text").val().split(" "));
   });
 }
 
-function search(text) {
+function addressSearch(postalCode) {
+  const url = `https://geoapi.heartrails.com/api/json?method=searchByPostal&postal=${postalCode}&jsonp=addressSearchCallback`;
+  const script = document.createElement("script");
+  script.src = url;
+  document.body.appendChild(script);
+}
+
+function addressSearchCallback(callback) {
+  // TODO: URLにパラメータを追加する
+  const x = callback.response.location[0].x;
+  const y = callback.response.location[0].y;
+  const store = hospitalStore.distanceFilter(x, y, 25);
+  showSearchResult(store.hospitals);
+}
+
+function nameSearch(text) {
   // TODO: URLにパラメータを追加する
   const store = hospitalStore.filtered(text);
   showSearchResult(store.hospitals);
@@ -111,6 +129,8 @@ function dataStore(data) {
         parseInt(row[14]),
         parseInt(row[15]),
         row[16],
+        139.742858, // TODO
+        35.6585805, // TODO
       ),
     );
   });

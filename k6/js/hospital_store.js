@@ -17,6 +17,12 @@ class HospitalStore {
       ),
     );
   }
+
+  distanceFilter(x, y, range) {
+    return new HospitalStore(
+      this.hospitals.filter((h) => calculateDistance(x, y, h.x, h.y) <= range),
+    );
+  }
 }
 
 class Hospital {
@@ -38,6 +44,8 @@ class Hospital {
     frozen_birth,
     frozen_rate,
     url,
+    x,
+    y,
   ) {
     // 病院名
     this.name = name;
@@ -73,5 +81,25 @@ class Hospital {
     this.frozen_rate = frozen_rate;
     // URL
     this.url = url;
+    // 緯度
+    this.x = x;
+    // 経度
+    this.y = y;
   }
+}
+
+const R = Math.PI / 180;
+
+function calculateDistance(lat1, lng1, lat2, lng2) {
+  lat1 *= R;
+  lng1 *= R;
+  lat2 *= R;
+  lng2 *= R;
+  return (
+    6371 *
+    Math.acos(
+      Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) +
+        Math.sin(lat1) * Math.sin(lat2),
+    )
+  );
 }
