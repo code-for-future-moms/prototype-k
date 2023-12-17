@@ -58,12 +58,14 @@ hr {
   border: 1px solid #d8e8e7;
 }
 
-.card .numbers > :nth-child(4n+1), .card .numbers > :nth-child(4n+2) {
+.card .numbers > :nth-child(4n + 1),
+.card .numbers > :nth-child(4n + 2) {
   padding: 0.3em 0.5em;
   background-color: #d8e8e7;
 }
 
-.card .numbers > :nth-child(4n+3), .card .numbers > :nth-child(4n+4) {
+.card .numbers > :nth-child(4n + 3),
+.card .numbers > :nth-child(4n + 4) {
   padding: 0.3em 0.5em;
   background-color: #ecf4f4;
 }
