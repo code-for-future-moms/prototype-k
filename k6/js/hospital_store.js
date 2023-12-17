@@ -7,20 +7,34 @@ class HospitalStore {
     return new HospitalStore(this.hospitals.slice(0, n));
   }
 
+  sortedByDistance() {
+    return new HospitalStore(
+      this.hospitals.sort(function (a, b) {
+        return a.distance > b.distance;
+      }),
+    );
+  }
+
   filtered(text) {
     if (text.length === 0) {
       return this;
     }
     return new HospitalStore(
-      this.hospitals.filter(
-        (h) => h.name.includes(text) || h.address.includes(text),
-      ),
+      this.hospitals.filter((h) => h.name.includes(text)),
     );
   }
 
   distanceFilter(x, y, range) {
     return new HospitalStore(
-      this.hospitals.filter((h) => calculateDistance(x, y, h.x, h.y) <= range),
+      this.hospitals
+        .map(function (h) {
+          const hospital = Object.assign({}, h);
+          hospital.distance = calculateDistance(x, y, h.x, h.y);
+          return hospital;
+        })
+        .filter(function (h) {
+          return h.distance <= range;
+        }),
     );
   }
 }

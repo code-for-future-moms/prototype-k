@@ -30,7 +30,9 @@ function addressSearchCallback(callback) {
   // TODO: URLにパラメータを追加する
   const x = callback.response.location[0].x;
   const y = callback.response.location[0].y;
-  const store = hospitalStore.distanceFilter(x, y, 25);
+  const store = hospitalStore
+    .distanceFilter(x, y, $("#address-search-range").val())
+    .sortedByDistance();
   showSearchResult(store.hospitals);
 }
 
@@ -50,9 +52,14 @@ function showSearchResult(hospitals) {
     .append("div")
     .attr("class", "card")
     .html((hospital) => {
+      const distance = hospital.distance
+        ? `<div class="distance">📍 ${
+            Math.floor(hospital.distance * 100) / 100
+          }km</div>`
+        : "";
       return `
 <div class="meta">
-  <div class="prefecture">【${hospital.prefecture}】</div>
+  ${distance}
   <h3 class="title">${hospital.name}</h3>
   <div class="address">${hospital.address}</div>
   <div class="phone">${hospital.phone} </div>
@@ -129,8 +136,8 @@ function dataStore(data) {
         parseInt(row[14]),
         parseInt(row[15]),
         row[16],
-        139.742858, // TODO
-        35.6585805, // TODO
+        parseFloat(row[17]),
+        parseFloat(row[18]),
       ),
     );
   });
