@@ -1,27 +1,16 @@
-.card {
-  border: 1px solid #666;
-  padding-bottom: 1em;
-  margin: 1em;
+body {
+  margin: 0 auto;
   max-width: 700px;
 }
 
-.card .meta {
-  margin: 1em;
+.card {
+  padding-bottom: 1em;
+  max-width: 600px;
 }
 
-.card .information {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.card .flags,
-.card .data {
-  max-width: 300px;
-  margin: 0 1em;
-  padding: 1em;
-  display: grid;
-  grid-template-columns: 5fr 1fr;
-  background-color: #cccccc;
+hr {
+  border: none;
+  border-top: 1px solid #666;
 }
 
 .prefecture {
@@ -39,4 +28,42 @@
 }
 
 .phone {
+}
+
+.card .meta {
+  margin: 1em;
+}
+
+.card .data h4 {
+  margin: 0 1em;
+}
+
+.data .flags {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.data .flags-data {
+  max-width: 300px;
+  margin: 1em;
+  /* display: grid; */
+  /* grid-template-columns: 1fr 8fr; */
+}
+
+.card .numbers {
+  max-width: 300px;
+  margin: 1em;
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  border: 1px solid #d8e8e7;
+}
+
+.card .numbers > :nth-child(4n+1), .card .numbers > :nth-child(4n+2) {
+  padding: 0.3em 0.5em;
+  background-color: #d8e8e7;
+}
+
+.card .numbers > :nth-child(4n+3), .card .numbers > :nth-child(4n+4) {
+  padding: 0.3em 0.5em;
+  background-color: #ecf4f4;
 }

@@ -53,40 +53,40 @@ function showSearchResult(hospitals) {
     .attr("class", "card")
     .html((hospital) => {
       const distance = hospital.distance
-        ? `<div class="distance">📍 ${
+        ? `<div class="distance">📍 約${
             Math.floor(hospital.distance * 100) / 100
           }km</div>`
         : "";
       return `
+<hr />
+
 <div class="meta">
   ${distance}
-  <h3 class="title">${hospital.name}</h3>
+  <h3 class="title"><a href="${hospital.url}">${hospital.name}</a></h3>
   <div class="address">${hospital.address}</div>
-  <div class="phone">${hospital.phone} </div>
-  <div class="url"><a href="${hospital.url}">${hospital.url}</a></div>
 </div>
 
-<div class="information">
+<div class="data">
+  <h4>◯治療内容</h4>
   <div class="flags">
-    <div class="item">人工授精</div>
-    <div class="value">${hospital.flag1 ? "o" : "x"}</div>
-    <div class="item">採卵術</div>
-    <div class="value">${hospital.flag2 ? "o" : "x"}</div>
-    <div class="item">体外受精</div>
-    <div class="value">${hospital.flag3 ? "o" : "x"}</div>
-    <div class="item">顕微授精</div>
-    <div class="value">${hospital.flag4 ? "o" : "x"}</div>
-    <div class="item">新鮮胚移植</div>
-    <div class="value">${hospital.flag5 ? "o" : "x"}</div>
-    <div class="item">凍結・融解胚移植</div>
-    <div class="value">${hospital.flag6 ? "o" : "x"}</div>
-    <div class="item">精巣内精子採取術</div>
-    <div class="value">${hospital.flat7 ? "o" : "x"}</div>
-    <div class="item">顕微鏡下精巣内精子採取術</div>
-    <div class="value">${hospital.flag8 ? "o" : "x"}</div>
+    <div class="flags-data">
+      <div>${hospital.flag1 ? "o" : "x"} 人工授精</div>
+      <div>${hospital.flag2 ? "o" : "x"} 採卵術</div>
+      <div>${hospital.flag3 ? "o" : "x"} 体外受精</div>
+      <div>${hospital.flag4 ? "o" : "x"} 顕微授精</div>
+    </div>
+    <div class="flags-data">
+      <div>${hospital.flag5 ? "o" : "x"} 新鮮胚移植</div>
+      <div>${hospital.flag6 ? "o" : "x"} 凍結・融解胚移植</div>
+      <div>${hospital.flat7 ? "o" : "x"} 精巣内精子採取術</div>
+      <div>${hospital.flag8 ? "o" : "x"} 顕微鏡下精巣内精子採取術</div>
+    </div>
   </div>
+</div>
 
-  <div class="data">
+<div class="data">
+  <h4>◯治療実績</h4>
+  <div class="numbers">
     <div class="item">採卵総回数（回）</div>
     <div class="value">${hospital.frozen_egg}</div>
     <div class="item">妊娠数（回）</div>
@@ -95,13 +95,8 @@ function showSearchResult(hospitals) {
     <div class="value">${hospital.frozen_birth}</div>
     <div class="item">移植あたり生産率（%）</div>
     <div class="value">${hospital.frozen_rate}%</div>
-    <div class="item">&nbsp;</div> <div class="value">&nbsp;</div>
-    <div class="item">&nbsp;</div> <div class="value">&nbsp;</div>
-    <div class="item">&nbsp;</div> <div class="value">&nbsp;</div>
-    <div class="item">&nbsp;</div> <div class="value">&nbsp;</div>
   </div>
 </div>
-
 `;
     });
 }
