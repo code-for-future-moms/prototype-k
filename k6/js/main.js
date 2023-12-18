@@ -6,16 +6,49 @@ $(document).ready(function () {
   d3.text(DataSource)
     .then(d3.tsvParseRows)
     .then(dataStore)
-    .then(initializePage);
+    .then(initializePage)
+    .then(updateState);
 });
+
+$(window).on("popstate", function (_) {
+  updateState();
+});
+
+function updateState(data) {
+  if (data) {
+    const queryString = Object.keys(data)
+      .map((key) => `${key}=${encodeURIComponent(data[key])}`)
+      .join("&");
+    window.history.pushState(data, null, "?" + queryString);
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const postalCode = urlParams.get("postalCode");
+  const range = urlParams.get("range");
+  const name = urlParams.get("search");
+
+  if (postalCode != null && range != null) {
+    document.getElementById("address-search-range").selectedIndex = range;
+    addressSearch(postalCode);
+    $("#name-search").hide();
+  } else if (name != null) {
+    nameSearch(name);
+  } else {
+    $("#name-search").show();
+    $("#search-result").hide();
+  }
+}
 
 function initializePage() {
   d3.select("#address-search-button").on("click", function (_) {
-    addressSearch($("#address-search-text").val());
+    const postalCode = $("#address-search-text").val();
+    const index = document.getElementById("address-search-range").selectedIndex;
+    updateState({ postalCode: postalCode, range: index });
   });
 
   d3.select("#name-search-button").on("click", function (_) {
-    nameSearch($("#name-search-text").val().split(" "));
+    const name = $("#name-search-text").val();
+    updateState({ search: name });
   });
 }
 
@@ -27,7 +60,6 @@ function addressSearch(postalCode) {
 }
 
 function addressSearchCallback(callback) {
-  // TODO: URLにパラメータを追加する
   const x = callback.response.location[0].x;
   const y = callback.response.location[0].y;
   const store = hospitalStore
@@ -37,12 +69,13 @@ function addressSearchCallback(callback) {
 }
 
 function nameSearch(text) {
-  // TODO: URLにパラメータを追加する
   const store = hospitalStore.filtered(text);
   showSearchResult(store.hospitals);
 }
 
 function showSearchResult(hospitals) {
+  $("#search-result").show();
+
   const container = d3.select("#result-list");
   container.selectAll("div").remove();
 
