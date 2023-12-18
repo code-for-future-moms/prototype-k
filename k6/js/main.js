@@ -26,12 +26,15 @@ function updateState(data) {
   const postalCode = urlParams.get("postalCode");
   const range = urlParams.get("range");
   const name = urlParams.get("search");
+  document.getElementById("address-search-range").selectedIndex = range || 0;
+  $("#address-search-text").val(postalCode || "");
+  $("#name-search-text").val(name || "");
 
   if (postalCode != null && range != null) {
-    document.getElementById("address-search-range").selectedIndex = range;
-    addressSearch(postalCode);
     $("#name-search").hide();
+    addressSearch(postalCode);
   } else if (name != null) {
+    $("#name-search").show();
     nameSearch(name);
   } else {
     $("#name-search").show();
