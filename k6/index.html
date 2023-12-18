@@ -17,22 +17,28 @@
   <body class="landing">
     <h1><a href="index.html">医療機関ごとの体外受精の治療成績</a></h1>
 
-    <div id="address-search">
-      <input type="text" id="address-search-text" placeholder="郵便番号で検索" />
+    <div id="address-search" class="contents">
+      <form id="address-search-form">
+        <h2>近くのクリニックを探す</h2>
+        <input type="text" id="address-search-text" placeholder="郵便番号で検索" />
 
-      <select id="address-search-range">
-        <option value="10">10km圏内</option>
-        <option value="25">25km圏内</option>
-        <option value="50">50km圏内</option>
-        <option value="100">100km圏内</option>
-      </select>
+        <select id="address-search-range">
+          <option value="10">10km圏内</option>
+          <option value="25">25km圏内</option>
+          <option value="50">50km圏内</option>
+          <option value="100">100km圏内</option>
+        </select>
 
-      <button id="address-search-button">検索</button>
+        <button type="submit">検索</button>
+      </form>
     </div>
 
-    <div id="name-search">
-      <input type="text" id="name-search-text" placeholder="クリニック名や住所で検索" />
-      <button id="name-search-button">検索</button>
+    <div id="name-search" class="contents">
+      <form id="name-search-form">
+        <h2>知っているクリニックを探す</h2>
+        <input type="text" id="name-search-text" placeholder="クリニック名で検索" />
+        <button type="submit">検索</button>
+      </form>
     </div>
 
     <div id="search-result" class="contents">

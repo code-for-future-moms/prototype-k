@@ -3,6 +3,10 @@ body {
   max-width: 700px;
 }
 
+#search-result {
+  display: hidden;
+}
+
 .card {
   padding-bottom: 1em;
   max-width: 600px;
