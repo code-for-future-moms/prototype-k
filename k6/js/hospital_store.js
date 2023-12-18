@@ -10,7 +10,7 @@ class HospitalStore {
   sortedByDistance() {
     return new HospitalStore(
       this.hospitals.sort(function (a, b) {
-        return a.distance > b.distance;
+        return a.distance - b.distance;
       }),
     );
   }
