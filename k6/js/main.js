@@ -40,13 +40,15 @@ function updateState(data) {
 }
 
 function initializePage() {
-  d3.select("#address-search-button").on("click", function (_) {
+  d3.select("#address-search-form").on("submit", function (event) {
+    event.preventDefault();
     const postalCode = $("#address-search-text").val();
     const index = document.getElementById("address-search-range").selectedIndex;
     updateState({ postalCode: postalCode, range: index });
   });
 
-  d3.select("#name-search-button").on("click", function (_) {
+  d3.select("#name-search-form").on("submit", function (event) {
+    event.preventDefault();
     const name = $("#name-search-text").val();
     updateState({ search: name });
   });
