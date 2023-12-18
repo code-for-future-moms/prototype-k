@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+
+    <script src="https://d3js.org/d3.v6.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" charset="utf-8"></script>
+    <script src="js/constants.js"></script>
+    <script src="js/hospital_store.js"></script>
+    <script src="js/main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+
+    <title>医療機関ごとの体外受精の治療成績</title>
+  </head>
+
+  <body class="landing">
+    <h1><a href="index.html">医療機関ごとの体外受精の治療成績</a></h1>
+
+    <div id="address-search">
+      <input type="text" id="address-search-text" placeholder="郵便番号で検索" />
+
+      <select id="address-search-range">
+        <option value="10">10km圏内</option>
+        <option value="25">25km圏内</option>
+        <option value="50">50km圏内</option>
+        <option value="100">100km圏内</option>
+      </select>
+
+      <button id="address-search-button">検索</button>
+    </div>
+
+    <div id="name-search">
+      <input type="text" id="name-search-text" placeholder="クリニック名や住所で検索" />
+      <button id="name-search-button">検索</button>
+    </div>
+
+    <div id="search-result" class="contents">
+      <h2>検索結果</h2>
+
+      <div id="result-list"></div>
+    </div>
+  </body>
+</html>
+

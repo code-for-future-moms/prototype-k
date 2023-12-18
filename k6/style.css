@@ -1,0 +1,71 @@
+body {
+  margin: 0 auto;
+  max-width: 700px;
+}
+
+.card {
+  padding-bottom: 1em;
+  max-width: 600px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #666;
+}
+
+.prefecture {
+}
+
+.title {
+  color: #333333;
+  margin: 0.5em 0;
+}
+
+.address {
+}
+
+.url {
+}
+
+.phone {
+}
+
+.card .meta {
+  margin: 1em;
+}
+
+.card .data h4 {
+  margin: 0 1em;
+}
+
+.data .flags {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.data .flags-data {
+  max-width: 300px;
+  margin: 1em;
+  /* display: grid; */
+  /* grid-template-columns: 1fr 8fr; */
+}
+
+.card .numbers {
+  max-width: 300px;
+  margin: 1em;
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  border: 1px solid #d8e8e7;
+}
+
+.card .numbers > :nth-child(4n + 1),
+.card .numbers > :nth-child(4n + 2) {
+  padding: 0.3em 0.5em;
+  background-color: #d8e8e7;
+}
+
+.card .numbers > :nth-child(4n + 3),
+.card .numbers > :nth-child(4n + 4) {
+  padding: 0.3em 0.5em;
+  background-color: #ecf4f4;
+}
