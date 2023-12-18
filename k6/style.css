@@ -4,7 +4,7 @@ body {
 }
 
 #search-result {
-  display: hidden;
+  display: none;
 }
 
 .card {
