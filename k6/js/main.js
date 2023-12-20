@@ -123,7 +123,7 @@ function showSearchResult(hospitals) {
 </div>
 
 <div class="data">
-  <h4>◯治療実績</h4>
+  <h4>◯凍結胚を用いた治療成績</h4>
   <div class="numbers">
     <div class="item">採卵総回数（回）</div>
     <div class="value">${hospital.frozen_egg}</div>
