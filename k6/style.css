@@ -73,3 +73,9 @@ hr {
   padding: 0.3em 0.5em;
   background-color: #ecf4f4;
 }
+
+#footer {
+  margin-top: 2em;
+  border-top: 1px solid #666;
+  font-size: 80%;
+}
