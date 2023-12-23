@@ -1,6 +1,50 @@
+html,
 body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+#body {
+  flex: 1;
+}
+
+div.contents {
   margin: 0 auto;
-  max-width: 700px;
+  padding: 0.5em;
+  max-width: 600px;
+}
+
+a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+h2 {
+  font-size: 1.2em;
+}
+
+h3.title {
+  font-size: 1.3em;
+}
+
+#address-search {
+  margin-bottom: 2em;
 }
 
 #search-result {
@@ -8,13 +52,14 @@ body {
 }
 
 .card {
-  padding-bottom: 1em;
+  padding-bottom: 0.4em;
   max-width: 600px;
 }
 
 hr {
   border: none;
   border-top: 1px solid #666;
+  margin-bottom: 1.6em;
 }
 
 .prefecture {
@@ -42,6 +87,11 @@ hr {
   margin: 0 1em;
 }
 
+.card img {
+  vertical-align: middle;
+  padding-bottom: 0.2em;
+}
+
 .data .flags {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -52,6 +102,11 @@ hr {
   margin: 1em;
   /* display: grid; */
   /* grid-template-columns: 1fr 8fr; */
+}
+
+.data .flags-data .check-off {
+  text-decoration: line-through;
+  color: #888;
 }
 
 .card .numbers {
@@ -72,4 +127,33 @@ hr {
 .card .numbers > :nth-child(4n + 4) {
   padding: 0.3em 0.5em;
   background-color: #ecf4f4;
+}
+
+footer {
+  margin-top: 2em;
+  padding-bottom: 3em;
+  font-size: 80%;
+  background-color: #356c94;
+  color: #ffffff;
+}
+
+footer a {
+  color: #ffffff;
+}
+
+footer .footer-icons {
+  margin: 1em 0;
+}
+
+footer .footer-icons img {
+  vertical-align: middle;
+  padding-bottom: 0.2em;
+}
+
+footer .footer-icons a {
+  margin-left: 0.5em;
+}
+
+footer ul {
+  padding-left: 1.5em;
 }

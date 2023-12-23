@@ -91,7 +91,7 @@ function showSearchResult(hospitals) {
     .attr("class", "card")
     .html((hospital) => {
       const distance = hospital.distance
-        ? `<div class="distance">📍 約${
+        ? `<div class="distance"><img src="images/pin.svg" /> 約${
             Math.floor(hospital.distance * 100) / 100
           }km</div>`
         : "";
@@ -105,25 +105,25 @@ function showSearchResult(hospitals) {
 </div>
 
 <div class="data">
-  <h4>◯治療内容</h4>
+  <h4>治療内容</h4>
   <div class="flags">
     <div class="flags-data">
-      <div>${hospital.flag1 ? "o" : "x"} 人工授精</div>
-      <div>${hospital.flag2 ? "o" : "x"} 採卵術</div>
-      <div>${hospital.flag3 ? "o" : "x"} 体外受精</div>
-      <div>${hospital.flag4 ? "o" : "x"} 顕微授精</div>
+      ${_flagToTag(hospital.flag1, "人工授精")}
+      ${_flagToTag(hospital.flag2, "採卵術")}
+      ${_flagToTag(hospital.flag3, "体外受精")}
+      ${_flagToTag(hospital.flag4, "顕微授精")}
     </div>
     <div class="flags-data">
-      <div>${hospital.flag5 ? "o" : "x"} 新鮮胚移植</div>
-      <div>${hospital.flag6 ? "o" : "x"} 凍結・融解胚移植</div>
-      <div>${hospital.flat7 ? "o" : "x"} 精巣内精子採取術</div>
-      <div>${hospital.flag8 ? "o" : "x"} 顕微鏡下精巣内精子採取術</div>
+      ${_flagToTag(hospital.flag5, "新鮮胚移植")}
+      ${_flagToTag(hospital.flag6, "凍結・融解胚移植")}
+      ${_flagToTag(hospital.flag7, "精巣内精子採取術")}
+      ${_flagToTag(hospital.flag8, "顕微鏡下精巣内精子採取術")}
     </div>
   </div>
 </div>
 
 <div class="data">
-  <h4>◯治療実績</h4>
+  <h4>凍結胚を用いた治療成績</h4>
   <div class="numbers">
     <div class="item">採卵総回数（回）</div>
     <div class="value">${hospital.frozen_egg}</div>
@@ -137,6 +137,13 @@ function showSearchResult(hospitals) {
 </div>
 `;
     });
+}
+
+function _flagToTag(flag, label) {
+  return `
+<div class="check-${flag ? "on" : "off"}">
+  <img src='images/check_${flag ? "on" : "off"}.svg' /> ${label}
+</div>`;
 }
 
 // TSVをデータに変換
