@@ -62,6 +62,11 @@ hr {
   margin: 0 1em;
 }
 
+.card img {
+  vertical-align: middle;
+  padding-bottom: 0.2em;
+}
+
 .data .flags {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -72,6 +77,11 @@ hr {
   margin: 1em;
   /* display: grid; */
   /* grid-template-columns: 1fr 8fr; */
+}
+
+.data .flags-data .check-off {
+  text-decoration: line-through;
+  color: #888;
 }
 
 .card .numbers {
