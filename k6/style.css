@@ -96,6 +96,14 @@ hr {
   font-size: 80%;
 }
 
+#footer .footer-icons {
+  margin: 1em 0;
+}
+
+#footer .footer-icons a {
+  margin-left: 0.5em;
+}
+
 #footer ul {
   padding-left: 1.5em;
 }
