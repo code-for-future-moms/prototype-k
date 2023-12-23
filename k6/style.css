@@ -1,15 +1,27 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  display: flex;
+  flex-direction: column;
   padding: 0;
   margin: 0;
+}
+
+#body {
+  flex: 1;
 }
 
 div.contents {
   margin: 0 auto;
   padding: 0.5em;
-  max-width: 700px;
+  max-width: 600px;
 }
 
 a:hover {
@@ -117,7 +129,7 @@ hr {
   background-color: #ecf4f4;
 }
 
-#footer {
+footer {
   margin-top: 2em;
   padding-bottom: 3em;
   font-size: 80%;
@@ -125,23 +137,23 @@ hr {
   color: #ffffff;
 }
 
-#footer a {
+footer a {
   color: #ffffff;
 }
 
-#footer .footer-icons {
+footer .footer-icons {
   margin: 1em 0;
 }
 
-#footer .footer-icons img {
+footer .footer-icons img {
   vertical-align: middle;
   padding-bottom: 0.2em;
 }
 
-#footer .footer-icons a {
+footer .footer-icons a {
   margin-left: 0.5em;
 }
 
-#footer ul {
+footer ul {
   padding-left: 1.5em;
 }
