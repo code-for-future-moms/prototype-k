@@ -23,48 +23,59 @@
     <title>医療機関ごとの体外受精の治療成績</title>
   </head>
 
-  <body class="landing">
-    <h1><a href="index.html">医療機関ごとの体外受精の治療成績</a></h1>
-
-    <div id="address-search" class="contents">
-      <form id="address-search-form">
-        <h2>近くのクリニックを探す</h2>
-        <input type="text" id="address-search-text" placeholder="郵便番号で検索" />
-
-        <select id="address-search-range">
-          <option value="10">10km圏内</option>
-          <option value="25">25km圏内</option>
-          <option value="50">50km圏内</option>
-          <option value="100">100km圏内</option>
-        </select>
-
-        <button type="submit">検索</button>
-      </form>
+  <body>
+    <div id="header">
+      <div class="contents">
+         <h1><a href="index.html">医療機関ごとの体外受精の治療成績</a></h1>
+      </div>
     </div>
 
-    <div id="name-search" class="contents">
-      <form id="name-search-form">
-        <h2>知っているクリニックを探す</h2>
-        <input type="text" id="name-search-text" placeholder="クリニック名で検索" />
-        <button type="submit">検索</button>
-      </form>
-    </div>
+    <div id="body">
+       <div class="contents">
+          <div id="address-search">
+            <form id="address-search-form">
+              <h2>近くのクリニックを探す</h2>
+              <input type="text" id="address-search-text" placeholder="郵便番号で検索" />
 
-    <div id="search-result" class="contents">
-      <h2>検索結果</h2>
+              <select id="address-search-range">
+                <option value="10">10km圏内</option>
+                <option value="25">25km圏内</option>
+                <option value="50">50km圏内</option>
+                <option value="100">100km圏内</option>
+              </select>
 
-      <div id="result-list"></div>
+              <button type="submit">検索</button>
+            </form>
+          </div>
+
+          <div id="name-search">
+            <form id="name-search-form">
+              <h2>知っているクリニックを探す</h2>
+              <input type="text" id="name-search-text" placeholder="クリニック名で検索" />
+              <button type="submit">検索</button>
+            </form>
+          </div>
+
+          <div id="search-result">
+            <h2>検索結果</h2>
+
+            <div id="result-list"></div>
+          </div>
+       </div>
     </div>
 
     <div id="footer">
-       <div class="footer-icons">
-          <a href="mailto:code-for-future-moms@ymail.ne.jp"><img src="images/email.svg" /> 問い合わせ</a>
-          <a href="https://twitter.com/angry_engineer0"><img src="images/x.svg" /> X（Twitter）</a>
+       <div class="contents">
+          <div class="footer-icons">
+             <a href="mailto:code-for-future-moms@ymail.ne.jp"><img src="images/email.svg" /> 問い合わせ</a>
+             <a href="https://twitter.com/angry_engineer0" target="_blank"><img src="images/x.svg" /> X（Twitter）</a>
+             <a href="https://github.com/code-for-future-moms/" target="_blank"><img src="images/github.svg" /> 開発に参加</a>
+          </div>
+          <ul>
+             <li><a href="https://funin-fuiku.cfa.go.jp/clinic" target="_blank">データソース（こども家庭庁 不妊治療医療機関検索サイト）</a></li>
+             <li><a href="https://icons8.jp/" target="_blank">Icons by Icons8</a></li>
+          </ul>
        </div>
-       <ul>
-          <li>データソース： <a href="https://funin-fuiku.cfa.go.jp/clinic" target="_blank">こども家庭庁 不妊治療医療機関検索サイト</a></li>
-          <li>開発に参加する： <a href="https://github.com/code-for-future-moms/">https://github.com/code-for-future-moms/</a>
-       </ul>
     </div>
   </body>
 </html>

@@ -2,8 +2,8 @@
 <svg width="12px" height="9px" viewBox="0 0 12 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>mail_FILL0_wght400_GRAD0_opsz20</title>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="footer-/-case2" transform="translate(-96.000000, -9.000000)" fill="#000000" fill-rule="nonzero">
-            <g id="mail_FILL0_wght400_GRAD0_opsz20" transform="translate(96.000000, 9.000000)">
+        <g id="footer-/-case3" transform="translate(-9.000000, -8.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="mail_FILL0_wght400_GRAD0_opsz20" transform="translate(9.000000, 8.000000)">
                 <path d="M1.125,9 C0.815625,9 0.55078125,8.88978125 0.33046875,8.66934375 C0.11015625,8.44890625 0,8.18391667 0,7.874375 L0,1.12057812 C0,0.811026042 0.11015625,0.546875 0.33046875,0.328125 C0.55078125,0.109375 0.815625,0 1.125,0 L10.875,0 C11.184375,0 11.4492188,0.11021875 11.6695313,0.33065625 C11.8898438,0.55109375 12,0.816083333 12,1.125625 L12,7.87942187 C12,8.18897396 11.8898438,8.453125 11.6695313,8.671875 C11.4492188,8.890625 11.184375,9 10.875,9 L1.125,9 Z M6,5.25 L1.125,2.453125 L1.125,7.875 L10.875,7.875 L10.875,2.453125 L6,5.25 Z M6,3.921875 L10.875,1.125 L1.125,1.125 L6,3.921875 Z M1.1671875,2.453125 L1.1671875,1.125 L1.1671875,7.875 L1.1671875,2.453125 Z" id="Shape"></path>
             </g>
         </g>
