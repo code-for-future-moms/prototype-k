@@ -23,18 +23,31 @@ a {
   background-color: transparent;
 }
 
+h2 {
+  font-size: 1.2em;
+}
+
+h3.title {
+  font-size: 1.3em;
+}
+
+#address-search {
+  margin-bottom: 2em;
+}
+
 #search-result {
   display: none;
 }
 
 .card {
-  padding-bottom: 1em;
+  padding-bottom: 0.4em;
   max-width: 600px;
 }
 
 hr {
   border: none;
   border-top: 1px solid #666;
+  margin-bottom: 1.6em;
 }
 
 .prefecture {
@@ -62,6 +75,11 @@ hr {
   margin: 0 1em;
 }
 
+.card img {
+  vertical-align: middle;
+  padding-bottom: 0.2em;
+}
+
 .data .flags {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -72,6 +90,11 @@ hr {
   margin: 1em;
   /* display: grid; */
   /* grid-template-columns: 1fr 8fr; */
+}
+
+.data .flags-data .check-off {
+  text-decoration: line-through;
+  color: #888;
 }
 
 .card .numbers {
