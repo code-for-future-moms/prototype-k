@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+   <head>      
+      <script src="https://code.highcharts.com/highcharts.js"></script>
+      <script src="https://code.highcharts.com/highcharts-more.js"></script>
+      <script src="https://code.highcharts.com/modules/data.js"></script>
+      <script src="https://code.highcharts.com/modules/exporting.js"></script>
+      <script src="https://code.highcharts.com/modules/export-data.js"></script>
+      <script src="script.js"></script>
+
+      <title>医療機関ごとの体外受精の治療成績</title>
+    </head>
+    
+    <body>
+        <div id="container"></div>
+        <script>
+            Highcharts.chart('container', {
+	credits: {
+		enabled: false
+	},
+	title: {
+		text: '医療機関ごとの体外受精の成績',
+	},
+	legend: {
+		enabled: false,
+	},
+	yAxis: {
+		title: {
+			text: '移植あたり生産率(%)',
+		},
+    plotLines: [{
+            color: '#FF0000',
+            width: 2,
+            value: 26.6
+        }]
+	},
+	data: {
+		csvURL: "https://raw.githubusercontent.com/sunmoonStern/funin-open-data/main/hospital-data-error.csv",
+	},
+	plotOptions: {
+		series: {
+			states: {
+				hover: {
+					enabled: false
+				}
+			},
+      opacity: 0.9
+		},
+	},
+	tooltip: {
+		enabled: false
+	},
+	series: [
+		{
+			id: 'frozen_rate2',
+			name: 'frozen egg rate',
+			type: 'column',
+			color: '#43a0c8',
+			dashStyle: 'solid',
+			marker: {
+				symbol: 'circle',
+			}
+		},
+		{
+			id: 'error',
+			type: 'errorbar',
+			color: '#feb56a',
+			linkedTo: ':previous',
+			stemWidth: '2',
+			whiskerLength: '10'
+		}
+	]
+});
+        </script>
+    </body>
+</html>
