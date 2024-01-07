@@ -15,6 +15,9 @@
         <div id="container"></div>
         <script>
             Highcharts.chart('container', {
+    chart: {
+        marginBottom: 100,
+    },
 	credits: {
 		enabled: false
 	},
@@ -25,6 +28,7 @@
 		enabled: false,
 	},
 	yAxis: {
+        min: 0,
 		title: {
 			text: '移植あたり生産率(%)',
 		},
@@ -48,7 +52,12 @@
 		},
 	},
 	tooltip: {
-		enabled: false
+		enabled: true,
+        formatter: function () {
+            return '<b>' + this.point.name +
+                '</b> : <b>' + this.y + '</b>';
+        },
+        stickOnContact: true
 	},
 	series: [
 		{
@@ -67,7 +76,8 @@
 			color: '#feb56a',
 			linkedTo: ':previous',
 			stemWidth: '2',
-			whiskerLength: '10'
+			whiskerLength: '10',
+            enableMouseTracking: false
 		}
 	]
 });
