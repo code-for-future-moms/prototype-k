@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+   <head>      
+      <script src="https://code.highcharts.com/highcharts.js"></script>
+      <script src="https://code.highcharts.com/highcharts-more.js"></script>
+      <script src="https://code.highcharts.com/modules/data.js"></script>
+      <script src="https://code.highcharts.com/modules/exporting.js"></script>
+      <script src="https://code.highcharts.com/modules/export-data.js"></script>
+      <script src="script.js"></script>
+
+      <title>医療機関ごとの体外受精の治療成績</title>
+    </head>
+    
+    <body>
+        <div id="container"></div>
+        <script>
+            Highcharts.chart('container', {
+    chart: {
+		height: 800,
+        marginBottom: 400,
+    },
+	credits: {
+		enabled: false
+	},
+	title: {
+		text: '医療機関ごとの体外受精の成績',
+	},
+	subtitle: {
+        text: '<span style="color: red">赤線</span>は2021年の凍結融解胚を用いた移植あたり生産率(%)※<a href="https://www.jsog.or.jp/activity/art/2021_JSOG-ART.pdf" style="color: blue">ARTデータブック</a>より引用',
+    },
+	legend: {
+		enabled: false,
+	},
+	xAxis: {
+		labels: {
+			align: "left",
+			step: 1,
+			style: {
+				fontSize: "80%",
+				textOverflow: "none",
+				writingMode: "vertical-rl",
+			}
+		}
+	},
+	yAxis: {
+        min: 0,
+		title: {
+			text: '移植あたり生産率(%)',
+		},
+		plotLines: [{
+			id: "baseline",
+            color: '#FF0000',
+            width: 2,
+            value: 26.6
+        }]
+	},
+	data: {
+		csvURL: "https://raw.githubusercontent.com/sunmoonStern/funin-open-data/main/hospital-data-error.csv",
+	},
+	plotOptions: {
+		series: {
+			states: {
+				hover: {
+					enabled: false
+				}
+			},
+      opacity: 0.9
+		},
+	},
+	tooltip: {
+		enabled: true,
+        formatter: function () {
+            return '<b>' + this.point.name +
+                '</b> : <b>' + this.y + '</b>';
+        },
+        stickOnContact: true
+	},
+	series: [
+		{
+			id: 'frozen_rate2',
+			name: 'frozen egg rate',
+			type: 'column',
+			color: '#43a0c8',
+			dashStyle: 'solid',
+			marker: {
+				symbol: 'circle',
+			},
+		},
+		{
+			id: 'error',
+			type: 'errorbar',
+			color: '#feb56a',
+			linkedTo: ':previous',
+			stemWidth: '2',
+			whiskerLength: '10',
+            enableMouseTracking: false,
+		}
+	]
+});
+        </script>
+    </body>
+</html>
