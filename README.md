@@ -5,8 +5,9 @@
 - https://code-for-future-moms.github.io/prototype-k/k2/
 - https://code-for-future-moms.github.io/prototype-k/k3/
 - https://code-for-future-moms.github.io/prototype-k/k4/
-- https://code-for-future-moms.github.io/prototype-k/k5/
-- https://code-for-future-moms.github.io/prototype-k/k6/
+- https://code-for-future-moms.github.io/prototype-k/k5/ 東京都の可視化プロトタイプ
+- https://code-for-future-moms.github.io/prototype-k/k6/ こども家庭庁公開のデータを利用した全国の医療機関の治療成績可視化
+- https://code-for-future-moms.github.io/prototype-k/viz/ 信頼区間を考慮した可視化
 
 
 ## サイトの目的
