@@ -95,6 +95,9 @@ function showSearchResult(hospitals) {
             Math.floor(hospital.distance * 100) / 100
           }km</div>`
         : "";
+      const notice = hospital.grade_notice
+        ? `<div class="notice">注: ${hospital.grade_notice}</div>`
+        : "";
       return `
 <hr />
 
@@ -124,6 +127,10 @@ function showSearchResult(hospitals) {
 
 <div class="data">
   <h4>凍結胚を用いた治療成績</h4>
+  <div class="grade">
+    <img src='${hospital.grade.iconPath}' /> ${hospital.grade.label}
+    ${notice}
+  </div>
   <div class="numbers">
     <div class="item">採卵総回数（回）</div>
     <div class="value">${hospital.frozen_egg}</div>

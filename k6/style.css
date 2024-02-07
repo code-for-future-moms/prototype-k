@@ -109,6 +109,16 @@ hr {
   color: #888;
 }
 
+.data .grade {
+  margin: 0.5em 1em;
+}
+
+.data .grade .notice {
+  font-size: 70%;
+  color: #333333;
+}
+
+
 .card .numbers {
   max-width: 300px;
   margin: 1em;
