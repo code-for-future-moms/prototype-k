@@ -104,11 +104,11 @@ class Hospital {
     this.grade = Grade.from(icon);
 
     this.grade_notice =
-      this.frozen_egg < 30
+      this.frozen_egg == 0 || this.frozen_egg >= 60
+        ? null
+        : this.frozen_egg < 30
         ? "データ数が極めて少なく、統計的な不確かさが大きい"
-        : this.frozen_egg < 60
-        ? "データ数が少なく、統計的な不確かさがやや大きい"
-        : null;
+        : "データ数が少なく、統計的な不確かさがやや大きい";
   }
 }
 
