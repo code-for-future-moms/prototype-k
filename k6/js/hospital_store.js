@@ -60,6 +60,7 @@ class Hospital {
     url,
     x,
     y,
+    icon,
   ) {
     // 病院名
     this.name = name;
@@ -99,6 +100,51 @@ class Hospital {
     this.x = x;
     // 経度
     this.y = y;
+    // アイコン ("N/A","worse","consistent","better")
+    this.grade = Grade.from(icon);
+  }
+}
+
+class Grade {
+  static names = {
+    worse: "worse_than_ave",
+    consistent: "consistent_with",
+    better: "better_than_ave",
+    notPublic: "not_public",
+  };
+
+  static from(icon) {
+    switch (icon) {
+      case "worse":
+        return new Grade(Grade.names.worse);
+      case "consistent":
+        return new Grade(Grade.names.consistent);
+      case "better":
+        return new Grade(Grade.names.better);
+      default:
+        return new Grade(Grade.names.notPublic);
+    }
+  }
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  get iconPath() {
+    return `images/icons/${this.name}.svg`;
+  }
+
+  get label() {
+    switch (this.name) {
+      case Grade.names.worse:
+        return "全国平均より低い";
+      case Grade.names.consistent:
+        return "全国平均と同等";
+      case Grade.names.better:
+        return "全国平均より高い";
+      default:
+        return "データが非公開";
+    }
   }
 }
 

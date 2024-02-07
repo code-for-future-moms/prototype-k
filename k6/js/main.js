@@ -178,6 +178,7 @@ function dataStore(data) {
         row[16],
         parseFloat(row[17]),
         parseFloat(row[18]),
+        row[19],
       ),
     );
   });
