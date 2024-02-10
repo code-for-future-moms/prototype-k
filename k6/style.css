@@ -51,6 +51,16 @@ h3.title {
   display: none;
 }
 
+.grade-notice {
+  font-size: 80%;
+  position: absolute;
+  max-width: 200px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  padding: 0.5em;
+  box-shadow: 2px 2px 5px #aaa;
+}
+
 .card {
   padding-bottom: 0.4em;
   max-width: 600px;

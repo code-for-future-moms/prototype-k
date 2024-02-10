@@ -126,7 +126,7 @@ function showSearchResult(hospitals) {
 </div>
 
 <div class="data">
-  <h4>凍結胚を用いた治療成績</h4>
+  <h4>凍結胚を用いた治療成績 <span class="notice"><img src="images/info.svg" /></span></h4>
   <div class="grade">
     <img src='${hospital.grade.iconPath}' /> ${hospital.grade.label}
     ${notice}
@@ -144,6 +144,22 @@ function showSearchResult(hospitals) {
 </div>
 `;
     });
+
+  $(".data .notice").on("mouseover", function (e) {
+    const x = e.target.offsetLeft;
+    const y = e.target.offsetTop + 30;
+    const text = `<div><em>データの計測方法</em></div>
+<div>ここに説明が入る</div>
+`;
+    $(".grade-notice").remove();
+    $("body").append(
+      `<div class="grade-notice" style="left: ${x}px; top: ${y}px">${text}</div>`,
+    );
+  });
+
+  $(".data .notice").on("mouseout", function (_) {
+    $(".grade-notice").remove();
+  });
 }
 
 function _flagToTag(flag, label) {
