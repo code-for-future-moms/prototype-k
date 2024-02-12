@@ -148,8 +148,8 @@ function showSearchResult(hospitals) {
   $(".data .notice").on("mouseover", function (e) {
     const x = e.target.offsetLeft;
     const y = e.target.offsetTop + 30;
-    const text = `<div><em>データの計測方法</em></div>
-<div>ここに説明が入る</div>
+    const text = `<div><em>生産分娩数(回)/移植総回数（回）✖️ 100(整数値への四捨五入なし)で計算した移植あたり生産率を95%信頼区間を考慮して全国平均と比較</em><div>
+<div>95%信頼区間の計算方法:<br>1.96 ✖️ &#8730; ((t - b) * &alpha; * &alpha; + b * (1 - &alpha;) * (1 - &alpha;))/t<br> t: 移植総回数(回) b: 生産分娩数(回) &alpha;: 生産分娩数(回)÷移植総回数（回)✖️100(整数値への四捨五入なし)<br> 全国平均:<br> <a href="https://www.jsog.or.jp/activity/art/2021_JSOG-ART.pdf" style="color: blue">ARTデータブック</a>より引用</div>
 `;
     $(".grade-notice").remove();
     $("body").append(
