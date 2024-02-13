@@ -51,14 +51,28 @@ h3.title {
   display: none;
 }
 
-.grade-notice {
-  font-size: 80%;
+#grade-notice {
+  font-size: 70%;
   position: absolute;
-  max-width: 200px;
+  display: none;
+  max-width: 300px;
   background-color: #fff;
   border: 1px solid #eee;
   padding: 0.5em;
   box-shadow: 2px 2px 5px #aaa;
+}
+
+#grade-notice .title {
+  font-weight: bold;
+}
+
+#grade-notice .math {
+  font-size: 90%;
+}
+
+#grade-notice ul {
+  padding: 0;
+  margin: 1.0em;
 }
 
 .card {
