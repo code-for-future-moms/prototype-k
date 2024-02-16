@@ -126,7 +126,7 @@ function showSearchResult(hospitals) {
 </div>
 
 <div class="data">
-  <h4>凍結胚を用いた治療成績</h4>
+  <h4>凍結胚を用いた治療成績 <span class="notice"><img src="images/info.svg" /></span></h4>
   <div class="grade">
     <img src='${hospital.grade.iconPath}' /> ${hospital.grade.label}
     ${notice}
@@ -144,6 +144,16 @@ function showSearchResult(hospitals) {
 </div>
 `;
     });
+
+  $(".data .notice").on("mouseover", function (e) {
+    const x = e.target.offsetLeft;
+    const y = e.target.offsetTop + 0;
+    $("#grade-notice").css("left", x).css("top", y).show();
+  });
+
+  $("#grade-notice").on("mouseleave", function (_) {
+    $("#grade-notice").hide();
+  });
 }
 
 function _flagToTag(flag, label) {

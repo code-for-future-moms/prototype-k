@@ -14,6 +14,7 @@
 
     <script src="https://d3js.org/d3.v6.js" charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" crossorigin="anonymous"></script>
     <script src="js/constants.js"></script>
     <script src="js/hospital_store.js"></script>
     <script src="js/main.js"></script>
@@ -81,6 +82,27 @@
           </ul>
        </div>
     </footer>
+
+    <div id="grade-notice">
+       <div class="title">治療成績の算出方法</div>
+       <div>以下「移植あたり生産率」をもって、95%信頼区間を考慮した全国平均との比較をします。</div>
+       <div class="math">$$\text{移植あたり生産率(α)} = \frac{\text{生産分娩数}}{\text{移植総回数}} \times 100$$</div>
+
+       <div>95%信頼区間の計算：</div>
+       <div class="math">
+          $$\text{95%信頼区間} = 1.96 \times \sqrt{\frac{(t - b) \times \alpha^2 + b \times (1 - \alpha)^2}{t}}$$
+          <ul>
+             <li>t: 移植総回数(回)</li>
+             <li>b: 生産分娩数(回)</li>
+             <li>α: 生産分娩数(回) ÷ 移植総回数(回) × 100 (整数値への四捨五入なし)</li>
+          </ul>
+       </div>
+
+       <div>全国平均：</div>
+       <div>
+          <a href="https://www.jsog.or.jp/activity/art/2021_JSOG-ART.pdf" style="color: blue">ARTデータブック</a>より引用
+       </div>
+    </div>
   </body>
 </html>
 
